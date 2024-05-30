@@ -1,0 +1,129 @@
+@keyframes  mover {
+    from {
+      transform: translateY(-50%);
+      opacity:0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }}
+  
+  #kanban {
+  /*  white-space: nowrap;*/
+    animation:mover 2s forwards;
+    animation-delay: 1s;
+    animation-fill-mode: forwards; }
+  
+  .list {
+    border-radius: 8px;
+    margin: 5px;
+    background-color: rgba(192, 192, 192, 0.4);
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+  }
+  
+  .list.ng-star-inserted{
+    width: 23%;
+    height:10%;
+  }
+  .card-details{
+      display:none;
+      font-size: 70%;
+  }
+  .card:hover .card-details {
+      display: block;
+    }
+  
+  .card:hover .suspensive{
+      display:none;
+    }
+  
+  p{
+    border-radius: 3px;
+    padding:5%;
+  }
+  
+  .horas{
+    background-color: #edc578;
+  }
+  
+  .fechas{
+    background-color: #86c285;
+  }
+  
+  .list-title {
+    font-size: 16px;
+    padding: 10px;
+    padding-left: 30px;
+    margin-bottom: -10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+
+
+  .scrollable-list {
+    max-height: 400px; /* Use max-height instead of height */
+    width: 100%; /* Use a percentage width */
+    overflow-y: auto; /* Add scrollbars when content exceeds height */
+    margin: 0 auto; /* Center the Kanban board */
+  }
+  .sortable-cards {
+    min-height: 380px;
+    display: block;
+  }
+  
+  .card {
+    position: relative;
+    background-color: white;
+    box-sizing: border-box;
+    width: 100%; /* Use a percentage width */
+    padding: 10px 20px;
+    margin: 10px auto; /* Center the cards */
+    cursor: pointer;
+  }
+  
+  .card-subject {
+    padding-bottom: 10px;
+  }
+  
+  .card-assignee {
+    opacity: 0.6;
+  }
+  
+  .card-priority {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 5px;
+    width: 5px;
+    border-radius: 2px;
+    background: #86c285;
+  }
+  
+  .priority-0 {
+      background: #ef7d59;
+  
+  }
+  
+  .priority-1 {
+      background: #edc578;
+  
+  
+  }
+  
+  .priority-2 {
+      background: #adadad;
+  }
+  
+  .priority-3 {
+      background: #86c285;
+  
+  }
+  
+  ::ng-deep .dx-sortable {
+    display: block;
+  }
+  
+  

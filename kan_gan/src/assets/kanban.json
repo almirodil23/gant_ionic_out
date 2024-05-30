@@ -1,0 +1,177 @@
+ [{
+	"nombre": "Tempo",
+	"ramas": [
+		{
+			"nombre": "Reuniones",
+			"arbol": [
+				"Concepto"
+			],
+			"horasEstimadas": 20,
+			"horasRealizadas": 10,
+			"asignado": "Carmen",
+				"fechaIncio": "2024-05-01",
+			"fechaFin": "2024-05-20",
+			"estado": 1
+		},
+		{
+			"nombre": "Planificación modelo de datos",
+			"arbol": [
+				"Servidor",
+				"Backend",
+				"Base de datos"
+			],
+			"horasEstimadas": 30,
+			"horasRealizadas": 0,
+			"asignado": "David",
+			"fechaIncio": "2024-05-25",
+			"fechaFin": "2024-05-31",
+			"estado": 0
+		},
+				{
+			"nombre": "Desarollo de servicios",
+			"arbol": [
+				"Servidor",
+				"Backend"
+			],
+			"horasEstimadas": 50,
+			"horasRealizadas": 0,
+			"asignado": "David",
+			"fechaIncio": "2024-05-25",
+			"fechaFin": "2024-05-31",
+			"estado": 0
+		}
+	]
+},
+{
+	"nombre": "Gesnova",
+	"ramas": [
+		{
+			"nombre": "Colores",
+			"arbol": [
+				"Concepto"
+			],
+			"horasEstimadas": 20,
+			"horasRealizadas": 10,
+			"asignado": "Raul",
+				"fechaIncio": "2024-05-01",
+			"fechaFin": "2024-05-20",
+			"estado": 1
+		},
+		{
+			"nombre": "Planificación XXX",
+			"arbol": [
+				"Servidor",
+				"Backend",
+				"Base de datos"
+			],
+			"horasEstimadas": 30,
+			"horasRealizadas": 0,
+			"asignado": "Yago",
+			"fechaIncio": "2024-05-25",
+			"fechaFin": "2024-05-31",
+			"estado": 0
+		},
+				{
+			"nombre": "Desarollo de servicios",
+			"arbol": [
+				"Servidor",
+				"Backend"
+			],
+			"horasEstimadas": 50,
+			"horasRealizadas": 0,
+			"asignado": "David",
+			"fechaIncio": "2024-05-25",
+			"fechaFin": "2024-05-31",
+			"estado": 0
+		}
+	]
+},
+{
+	"nombre": "Bilborent",
+	"ramas": [
+		{
+			"nombre": "ffff",
+			"arbol": [
+				"Concepto"
+			],
+			"horasEstimadas": 20,
+			"horasRealizadas": 10,
+			"asignado": "Francisco",
+				"fechaIncio": "2024-05-01",
+			"fechaFin": "2024-05-20",
+			"estado": 1
+		},
+		{
+			"nombre": "Planificación modelo de datos",
+			"arbol": [
+				"Servidor",
+				"Backend",
+				"Base de datos"
+			],
+			"horasEstimadas": 30,
+			"horasRealizadas": 0,
+			"asignado": "David",
+			"fechaIncio": "2024-05-25",
+			"fechaFin": "2024-05-31",
+			"estado": 0
+		},
+				{
+			"nombre": "Desarollo de servicios",
+			"arbol": [
+				"Servidor",
+				"Backend"
+			],
+			"horasEstimadas": 50,
+			"horasRealizadas": 0,
+			"asignado": "David",
+			"fechaIncio": "2024-05-25",
+			"fechaFin": "2024-05-31",
+			"estado": 0
+		}
+	]
+},
+{
+	"nombre": "Manuela",
+	"ramas": [
+		{
+			"nombre": "Reuniones",
+			"arbol": [
+				"Concepto"
+			],
+			"horasEstimadas": 20,
+			"horasRealizadas": 10,
+			"asignado": "Carmen",
+				"fechaIncio": "2024-05-01",
+			"fechaFin": "2024-05-20",
+			"estado": 1
+		},
+		{
+			"nombre": "Planificación modelo de datos",
+			"arbol": [
+				"Servidor",
+				"Backend",
+				"Base de datos"
+			],
+			"horasEstimadas": 30,
+			"horasRealizadas": 0,
+			"asignado": "David",
+			"fechaIncio": "2024-05-25",
+			"fechaFin": "2024-05-31",
+			"estado": 0
+		},
+				{
+			"nombre": "Desarollo de servicios",
+			"arbol": [
+				"Servidor",
+				"Backend"
+			],
+			"horasEstimadas": 50,
+			"horasRealizadas": 0,
+			"asignado": "David",
+			"fechaIncio": "2024-05-25",
+			"fechaFin": "2024-05-31",
+			"estado": 0
+		}
+	]
+}]
+

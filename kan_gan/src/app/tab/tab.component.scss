@@ -1,0 +1,48 @@
+
+$md-xsmall: 768px; 
+
+.tab-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  
+}
+
+
+
+.mat-tab-header-pagination.mat-tab-header-pagination-disabled {
+  display: none !important;
+}
+
+::ng-deep .mat-tab-group.mat-stretch-tabs .mat-tab-labels {
+  display: flex;
+  width: 100%; /* Asegura que las pestañas ocupen todo el ancho */
+}
+
+::ng-deep .mat-tab-group.mat-stretch-tabs .mat-tab-label {
+  flex: 1; /* Permite que cada pestaña se expanda proporcionalmente */
+  text-align: center;
+  max-width: none; /* Evita que las pestañas se contraigan demasiado */
+}
+    
+ /*   mat-tab-group {
+      flex-grow: 1;
+      padding:2%;
+      padding-top: 0;;
+      overflow: hidden;
+  
+      .mat-tab-label-container {
+        scroll-behavior: smooth;
+      }
+    }
+*/
+
+
+
+
+
+  
+.material-icons{
+  font-size:100% !important;
+}
+
