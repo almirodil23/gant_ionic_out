@@ -1,0 +1,29 @@
+<div class="widget-container">
+    <dx-gantt scaleType="days" [startDateRange]="fechaComienzo"
+        [endDateRange]="fechaFinal" taskContentTemplate="taskContentTemplate" (onTaskClick)="verProyecto($event)"
+        (onTaskDblClick)="evitarAccion($event)" style="min-height: 500px;">
+        <dxo-tasks [dataSource]="tasks"></dxo-tasks>
+
+        <dxi-column dataField="title" caption="404" [width]="300"></dxi-column>
+        <dxi-column dataField="start" caption="Start Date" dataType="date"></dxi-column>
+        <dxi-column dataField="end" caption="End Date" dataType="date"></dxi-column>
+
+        <dxo-toolbar>
+            <dxi-item name="collapseAll"></dxi-item>
+            <dxi-item name="expandAll"></dxi-item>
+            <dxi-item name="separator"></dxi-item>
+            <dxi-item name="zoomIn"></dxi-item>
+            <dxi-item name="zoomOut"></dxi-item>
+        </dxo-toolbar>
+
+        <dxo-editing [enabled]="false"></dxo-editing>
+
+        <div *dxTemplate="let item of 'taskContentTemplate'" class="custom-task {{ getTaskColor(item.taskData.id) }}"
+            style.width="{{ item.taskSize.width }}px">
+            <div class="custom-task-wrapper">
+                <div class="custom-task-title">{{ item.taskData.title }}</div>
+            </div>
+            <div class="custom-task-progress" style.width="{{ item.taskData.progress }}%"></div>
+        </div>
+    </dx-gantt>
+</div>

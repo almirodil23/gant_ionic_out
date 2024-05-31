@@ -23,6 +23,10 @@ import { RouteReuseStrategy } from '@angular/router';
 import { KanbanComponent } from './kanban/kanban.component';
 import { KanbanService } from './kanban.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { GanttComponent } from './gantt/gantt.component';
+import { GraficoComponent } from './grafico/grafico.component';
+import { GanttService } from './gantt/gantt.service';
+import { GraficoService } from './grafico/grafico.service';
 
 
 
@@ -34,6 +38,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     TabComponent,
     KanbanComponent,
+    GanttComponent,
+    GraficoComponent
     
   
   ],
@@ -67,8 +73,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     DxChartModule,
   
+  
   ],
-  providers: [KanbanService],
+  providers: [KanbanService,GanttService,GraficoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

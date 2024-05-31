@@ -4,9 +4,15 @@ import { HomeComponent } from './home/home.component';
 import { AppComponent } from './app.component';
 import { TabComponent } from './tab/tab.component';
 import { KanbanComponent } from './kanban/kanban.component';
+import { GanttComponent } from './gantt/gantt.component';
+import { GraficoComponent } from './grafico/grafico.component';
 
 const routes: Routes = [ 
 {path:'', component:HomeComponent,},
+{path:'gant', component:GanttComponent},
+{
+  path:"grafico/:nP", component:GraficoComponent
+},
 { path: 'kanban/:i', component: KanbanComponent, runGuardsAndResolvers: 'always' },
 
 ];

@@ -29,13 +29,9 @@
         </mat-list-item>
   
         <div class="submenu" [ngClass]="{ 'expanded': showSubmenu }" *ngIf="isShowing || isExpanded" style="padding: 0;">
-          <mat-list-item (click)="showGantSubmenu = !showGantSubmenu" class="parent">
+          <mat-list-item (click)="openNewTabWithDataGant();" class="parent">
             <span class="full-width" *ngIf="isExpanded1 || isShowing1">Gant</span>
-            <mat-icon class="menu-button" [ngClass]="{ 'rotated': showGantSubmenu }" *ngIf="isExpanded1 || isShowing1">expand_more</mat-icon>
 		</mat-list-item>
-			<div style="display:flex;
-			flex-direction: column; justify-content: end; align-items: center;margin-top: 3%;" [ngClass]="{ 'expanded': showSubmenu }">
-            <mat-list-item *ngFor="let nombre of nombres; let i =index" (click)="openNewTabWithData(i);" style="padding-left: 6vw;">{{nombre}}</mat-list-item></div>
         </div>
 
         <div class="submenu" [ngClass]="{ 'expanded': showSubmenu }" *ngIf="isShowing || isExpanded" style="padding: 0;">

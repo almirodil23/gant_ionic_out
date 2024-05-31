@@ -45,6 +45,12 @@ export class NavbarComponent {
     this.tabService.openNewTab(data);
     this.router.navigate(['kanban', i]);
   }
+  openNewTabWithDataGant(): void {
+    this.tabService.welcome();
+    const data = { label:'Gant', content:'Hola' };
+    this.tabService.openNewTab(data);
+    this.router.navigate(['gant']);
+  }
 
   mouseenter() {
     if (!this.isExpanded) {

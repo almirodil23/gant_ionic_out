@@ -85,7 +85,7 @@ export class TabComponent implements OnChanges {
           let tabs = document.getElementsByClassName('mdc-tab mat-mdc-tab mat-mdc-focus-indicator ng-star-inserted');
           tabs[tabs.length - 1].dispatchEvent(new MouseEvent("click", {bubbles: true, cancelable: true, view: window}));
           this.exe = true;
-      }, 500);}
+      }, 200);}
   
     return connections;
   }

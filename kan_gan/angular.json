@@ -17,6 +17,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "devexpress-diagram",
+              "devexpress-gantt",
+              "devextreme-quill",
+              "jszip"
+            ],
             "outputPath": "dist/kan_gan",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -30,6 +36,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/devexpress-gantt/dist/dx-gantt.min.css",
               "node_modules/devextreme/dist/css/dx.light.css",
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
