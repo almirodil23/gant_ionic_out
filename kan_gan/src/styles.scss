@@ -108,6 +108,14 @@ white-space: nowrap;
 }
 
 
+.mat-mdc-nav-list{
+  display:flex !important;
+  flex-direction: column;
+}
+
+.mat-mdc-list-item.mdc-list-item.parent.mat-mdc-list-item-interactive.mat-mdc-list-item-single-line.mdc-list-item--with-one-line{
+  display:flex;
+}
 
 .btn{
   --bs-btn-font-size: 100%;

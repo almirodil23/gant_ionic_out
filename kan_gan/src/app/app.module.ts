@@ -18,7 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TabComponent } from './tab/tab.component';
 import { MatCheckboxModule} from '@angular/material/checkbox';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import { DxBulletModule, DxChartComponent, DxChartModule, DxDataGridModule, DxFormModule, DxPivotGridComponent, DxPivotGridModule, DxScrollViewModule, DxSortableModule, DxTemplateModule } from 'devextreme-angular';
+import { DxBulletModule, DxChartComponent, DxChartModule, DxCheckBoxModule, DxDataGridModule, DxFormModule, DxGanttModule, DxPivotGridComponent, DxPivotGridModule, DxScrollViewModule, DxSelectBoxModule, DxSortableModule, DxTemplateModule } from 'devextreme-angular';
 import { RouteReuseStrategy } from '@angular/router';
 import { KanbanComponent } from './kanban/kanban.component';
 import { KanbanService } from './kanban.service';
@@ -59,8 +59,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     DxFormModule,
     DxScrollViewModule,
     DxSortableModule,
-    HttpClientModule
-
+    HttpClientModule,
+    BrowserModule,
+    DxGanttModule,
+    DxCheckBoxModule,
+    DxSelectBoxModule,
+    AppRoutingModule,
+    DxChartModule,
   
   ],
   providers: [KanbanService],

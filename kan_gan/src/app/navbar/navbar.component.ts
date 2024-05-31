@@ -1,10 +1,9 @@
-import { Component, ViewChild,  } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { TabService } from '../tab-service.service';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
-import { SelectionModel } from '@angular/cdk/collections';
-
+import { KanbanService } from '../kanban.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,45 +11,60 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-
-
-  data: any;
+  
+  nombres: any = [];
   tabs = [];
   selected = new FormControl(0);
   selectedTab: number | null = null;
   selectAfterAdding: HTMLInputElement | undefined; 
-  private selection = new SelectionModel();
   showWelcomeMessage = true; 
 
   @ViewChild('sidenav') sidenav!: MatSidenavModule;
   isExpanded = true;
-  showSubmenu: boolean = false;
+  isExpanded1 = true;
+  isExpanded2 = true;
+ 
   isShowing = false;
-  showSubSubMenu: boolean = false;
+  isShowing1 = false;
+  isShowing2 = false;
 
-  constructor(private tabService: TabService,private router: Router) {
-     
+  showSubmenu: boolean = false;
+  showGantSubmenu: boolean = false;
+  showKanbanSubmenu: boolean = false;
+ 
+
+  constructor(private tabService: TabService, private router: Router, private kanban: KanbanService) {
+    this.nombres = this.kanban.getNames();
+    console.log(this.nombres);
   }
 
-  openNewTabWithData(i:number): void {
+  openNewTabWithData(i: number): void {
     this.tabService.welcome();
-    const data = { label:'Estado', content:'Hola' };
+    const name= this.nombres[i]
+    const data = { label:name, content:'Hola' };
     this.tabService.openNewTab(data);
-    if (i==0){this.router.navigate(['./kanban',i]);}
-    if (i==1){this.router.navigate(['./proovedores'])}
-
-
+    this.router.navigate(['kanban', i]);
   }
-
-
-
 
   mouseenter() {
     if (!this.isExpanded) {
       this.isShowing = true;
     }
+    if (!this.isExpanded1) {
+      this.isShowing1 = true;
+    }
+    if (!this.isExpanded1) {
+      this.isShowing1 = true;
+    }
   }
+
   mouseleave() {
+    if (!this.isExpanded1) {
+      this.isShowing1 = false;
+    }
+    if (!this.isExpanded1) {
+      this.isShowing1 = false;
+    }
     if (!this.isExpanded) {
       this.isShowing = false;
     }

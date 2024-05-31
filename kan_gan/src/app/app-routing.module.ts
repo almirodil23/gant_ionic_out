@@ -7,8 +7,7 @@ import { KanbanComponent } from './kanban/kanban.component';
 
 const routes: Routes = [ 
 {path:'', component:HomeComponent,},
-{path:'tab', component:TabComponent},
-{ path: 'kanban/:i', component: KanbanComponent },
+{ path: 'kanban/:i', component: KanbanComponent, runGuardsAndResolvers: 'always' },
 
 ];
 

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DxSortableTypes } from 'devextreme-angular/ui/sortable';
 import { KanbanService } from '../kanban.service';
-import { ActivatedRoute } from '@angular/router';
-import { HttpParams } from '@angular/common/http';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { map, switchMap } from 'rxjs/operators';
+
 
 
 @Component({
@@ -12,7 +13,7 @@ import { HttpParams } from '@angular/common/http';
 })
 
 
-export class KanbanComponent implements OnInit {
+export class KanbanComponent implements OnInit{
   i: number=0;
   url:any;
   lists:any[][]= [];
@@ -22,19 +23,16 @@ export class KanbanComponent implements OnInit {
   statusesInt = [0,1,2,3]
   nombres:any;
   constructor(private service: KanbanService, private route: ActivatedRoute) {
-    this.route.params.subscribe(params => {
-      this.i = +params['i'];
-      this.selectProyecto(this.i);
-      console.log(this.i)
-    });
-  }  
 
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.i = +params['i'];
-      this.selectProyecto(this.i);
-    });
+
   }
+  
+  ngOnInit(): void {
+    this.i=this.route.snapshot.params['i']
+      this.selectProyecto(this.i);
+    
+  }
+
 
   getNombres(){
     this.nombres=this.service.getNames()

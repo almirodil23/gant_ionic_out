@@ -1,4 +1,4 @@
-@keyframes  mover {
+/*@keyframes  mover {
     from {
       transform: translateY(-50%);
       opacity:0;
@@ -9,11 +9,11 @@
     }}
   
   #kanban {
-  /*  white-space: nowrap;*/
+  /*  white-space: nowrap;
     animation:mover 2s forwards;
     animation-delay: 1s;
     animation-fill-mode: forwards; }
-  
+  */
   .list {
     border-radius: 8px;
     margin: 5px;

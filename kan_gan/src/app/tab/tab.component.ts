@@ -22,6 +22,7 @@ export class TabComponent implements OnChanges {
   isKanbanVisible:boolean=false;
   isProovedorVisible:boolean=false
   data: any;
+  exe=false
   tabs:any = [];
   selected = new FormControl(0);
   selectedTab: number | null = null;
@@ -41,8 +42,8 @@ export class TabComponent implements OnChanges {
 
   
   ngOnChanges(): void {
-    let tabs=document.getElementsByClassName('mat-tab-label-content')
-    tabs[tabs.length-1].dispatchEvent(new MouseEvent("click", {bubbles: true,cancelable: true,view: window,}))
+   
+ 
   }
 
   select(tab:any) { 
@@ -62,10 +63,8 @@ export class TabComponent implements OnChanges {
 
   addTab(data: { label: string; content: string }): void {
     this.tabs.push(data);
-    this.tabs.forEach((element:any) => console.log(element.content));
     this.isKanbanVisible=true
-    console.log(this.isKanbanVisible)
-
+    this.exe=false
   }
 
   closeTab(index: number): void {
@@ -81,6 +80,13 @@ export class TabComponent implements OnChanges {
         connections.push('tab-' + i);
       }
     }
+    if (!this.exe) {
+      setTimeout(() => {
+          let tabs = document.getElementsByClassName('mdc-tab mat-mdc-tab mat-mdc-focus-indicator ng-star-inserted');
+          tabs[tabs.length - 1].dispatchEvent(new MouseEvent("click", {bubbles: true, cancelable: true, view: window}));
+          this.exe = true;
+      }, 500);}
+  
     return connections;
   }
 
