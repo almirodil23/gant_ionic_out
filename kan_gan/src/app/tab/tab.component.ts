@@ -86,6 +86,8 @@ export class TabComponent implements OnChanges {
           tabs[tabs.length - 1].dispatchEvent(new MouseEvent("click", {bubbles: true, cancelable: true, view: window}));
           this.exe = true;
       }, 200);}
+
+      
   
     return connections;
   }

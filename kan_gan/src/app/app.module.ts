@@ -3,7 +3,9 @@ import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-bro
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
-import { MatDialog } from '@angular/material/dialog';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +29,9 @@ import { GanttComponent } from './gantt/gantt.component';
 import { GraficoComponent } from './grafico/grafico.component';
 import { GanttService } from './gantt/gantt.service';
 import { GraficoService } from './grafico/grafico.service';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -72,6 +77,11 @@ import { GraficoService } from './grafico/grafico.service';
     DxSelectBoxModule,
     AppRoutingModule,
     DxChartModule,
+    MatDatepickerModule,
+    MatCardModule,
+    MatNativeDateModule
+  
+
   
   
   ],

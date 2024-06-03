@@ -41,6 +41,7 @@
 		  </mat-list-item>
 			  <div style="display:flex;
 			  flex-direction: column; justify-content: end; align-items: center;margin-top: 3%;">
+        <mat-list-item (click)="openNewTabWithData(-1);" style="padding-left: 6vw;">General</mat-list-item>
 			  <mat-list-item *ngFor="let nombre of nombres; let i =index;" (click)="openNewTabWithData(i);" style="padding-left: 6vw;">{{nombre}}</mat-list-item></div>
 		  </div>
       </mat-nav-list>

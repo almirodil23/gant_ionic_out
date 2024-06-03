@@ -23,8 +23,7 @@ export class TabService {
 
   openNewTab(data:any): void {
     this.newTabSubject.next(data);
-   
-
+    
   }
 
   getNewTabObservable(): Observable<any> {

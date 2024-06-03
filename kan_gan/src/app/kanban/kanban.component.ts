@@ -3,6 +3,7 @@ import { DxSortableTypes } from 'devextreme-angular/ui/sortable';
 import { KanbanService } from '../kanban.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
+import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
 
 
 
@@ -33,18 +34,38 @@ export class KanbanComponent implements OnInit{
     
   }
 
+  dateClass() {
+    return (date: Date): MatCalendarCellCssClasses => {
+      if (date.getDate() === 1) {
+        return 'special-date';
+      } else {
+        return 'container';
+      }
+    };
+  }
 
   getNombres(){
     this.nombres=this.service.getNames()
   }
-
   selectProyecto(i:number){
-    const tasks = this.service.getTasks()[this.i];
-
-    this.statusesInt.forEach((status) => {
-      this.lists.push(tasks.ramas.filter((task:any) => task.estado === status));
-    });
+    let taskis:any
+    if (i==-1){taskis=this.service.getTasks();
+      for (let c=0;c<taskis.length;c++) {
+        this.statusesInt.forEach((status) => {
+          this.lists.push(taskis[c].ramas.filter((task: any) => task.estado === status));
+      })}
+    }
+    
+    
+    
+    else {taskis = this.service.getTasks()[this.i];
+      this.statusesInt.forEach((status) => {
+        this.lists.push(taskis.ramas.filter((task:any) => task.estado === status));
+      });
+    };
   }
+ 
+
   
   onListReorder(e: DxSortableTypes.ReorderEvent) {
     const list = this.lists.splice(e.fromIndex, 1)[0];
@@ -66,11 +87,11 @@ export class KanbanComponent implements OnInit{
     movedItem.estado = this.lists.findIndex((list:any[])=> list === e.toData);
   }
 
-  salvado()  {
+  salvado(i:number)  {
     let exportData = this.lists;
-    console.log(exportData);
-    this.service.saveTasks(exportData)
+    this.service.saveTasks(exportData,i)
+    
     }
 
-
+fechas(){}
 }

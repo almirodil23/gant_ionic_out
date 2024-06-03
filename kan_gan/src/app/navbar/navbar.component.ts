@@ -40,17 +40,24 @@ export class NavbarComponent {
 
   openNewTabWithData(i: number): void {
     this.tabService.welcome();
-    const name= this.nombres[i]
+    let name= this.nombres[i]
+    if(i==-1){name='General'    }
     const data = { label:name, content:'Hola' };
     this.tabService.openNewTab(data);
-    this.router.navigate(['kanban', i]);
+    setTimeout(() =>{
+      this.router.navigate(['kanban', i])
+    }, 500)
+
   }
   openNewTabWithDataGant(): void {
     this.tabService.welcome();
     const data = { label:'Gant', content:'Hola' };
     this.tabService.openNewTab(data);
-    this.router.navigate(['gant']);
+    setTimeout(() => {
+    this.router.navigate(['gant']);},500)
+
   }
+  
 
   mouseenter() {
     if (!this.isExpanded) {

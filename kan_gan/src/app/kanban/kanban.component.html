@@ -42,10 +42,16 @@
                   <div class="card-subject">{{ task.nombre }}</div>
                   <div class="card-assignee">{{task.asignado}}</div>
                   <div class="suspensive">...</div>
+
                   <div class="card-details" >
                         <p>{{ task.arbol }}</p>
-                        <p class="fechas">Fecha de Inicio: {{task.fechaIncio}}</p>
+                        <p class="fechas" (mouseenter)="fechas()">Fecha Inicio: {{task.fechaIncio}}</p>
                         <p class="fechas">Fecha Fin: {{ task.fechaFin}}</p>
+                        <div class="graf">
+                          <mat-card class="container-fluid">
+                            <mat-calendar [dateClass]="dateClass()"></mat-calendar>
+                          </mat-card>
+                        </div>
                         <p class="horas">Horas Estimadas: {{ task.horasEstimadas }}</p>
                         <p class="horas">Horas Realizadas: {{ task.horasRealizadas }}</p>
                         </div>
@@ -56,7 +62,7 @@
           </dx-sortable>
         </dx-scroll-view>
         <div class="container">
-          <button type="button" class="btn btn-warning" (click)="salvado()">Guardar</button>
+          <button type="button" class="btn btn-warning" (click)="salvado(i)">Guardar</button>
         </div>
       </div>
     </div>

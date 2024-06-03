@@ -247,7 +247,15 @@ float: right;
 }
 
 
+.graf{
+  display:none
+}
 
+.fechas :hover{
+  .graf{
+  display:flex
+}
+}
 
 
 .mat-tab-group.mat-primary .mat-ink-bar{
@@ -273,3 +281,6 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
+.special-date {
+  background-color: red;
+}

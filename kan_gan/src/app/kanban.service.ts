@@ -8,17 +8,19 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   providedIn: 'root'
 })
 
-
 export class KanbanService {
 
+  newData:any;
 
-  constructor(private http:HttpClient){}
+  constructor(private http:HttpClient){
+    this.newData= kanban
+  }
   url='http://localhost:3000/api/save'
 
 	
 
   getTasks() {
-    return kanban
+    return this.newData
   }
 
   getNames(){
@@ -28,10 +30,19 @@ export class KanbanService {
     return names
   }
 
-  saveTasks(exportData: any): Observable<any> {
-	return this.http.post<any>(this.url, exportData);
-  }
+  saveTasks(exportData: any,i:number) {
+/*	return this.http.post<any>(this.url, exportData);*/
+  let arreglo=kanban.filter((_, index) => index !== 0);
+  this.newData.push(exportData)
+  console.log(this.newData)
+  const dataStr = JSON.stringify(this.newData);
+  const blob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  window.open(url)
 
-}
+
+}}
 
 
+
+    
