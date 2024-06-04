@@ -22,6 +22,7 @@ export class TabComponent implements OnChanges {
   isKanbanVisible:boolean=false;
   isProovedorVisible:boolean=false
   data: any;
+  id:number|any;
   exe=false
   tabs:any = [];
   selected = new FormControl(0);
@@ -61,7 +62,8 @@ export class TabComponent implements OnChanges {
       return this.selection.isSelected(tab);
     }  
 
-  addTab(data: { label: string; content: string }): void {
+  addTab(data: { label: string; content: any }): void {
+    this.id=data.content
     this.tabs.push(data);
     this.isKanbanVisible=true
     this.exe=false
@@ -85,7 +87,8 @@ export class TabComponent implements OnChanges {
           let tabs = document.getElementsByClassName('mdc-tab mat-mdc-tab mat-mdc-focus-indicator ng-star-inserted');
           tabs[tabs.length - 1].dispatchEvent(new MouseEvent("click", {bubbles: true, cancelable: true, view: window}));
           this.exe = true;
-      }, 200);}
+      }, 100);}
+      
 
       
   

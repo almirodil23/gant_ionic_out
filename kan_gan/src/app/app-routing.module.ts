@@ -9,11 +9,9 @@ import { GraficoComponent } from './grafico/grafico.component';
 
 const routes: Routes = [ 
 {path:'', component:HomeComponent,},
+{path: 'kanban/:i', component: KanbanComponent, runGuardsAndResolvers: 'always'},
 {path:'gant', component:GanttComponent},
 {path:"gant/grafico/:nP", component:GraficoComponent, runGuardsAndResolvers: 'always'},
-{path: 'kanban/:i', component: KanbanComponent, runGuardsAndResolvers: 'always' },
-
-
 ];
 
 

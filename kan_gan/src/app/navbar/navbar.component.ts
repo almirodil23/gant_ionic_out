@@ -31,6 +31,7 @@ export class NavbarComponent {
   showSubmenu: boolean = false;
   showGantSubmenu: boolean = false;
   showKanbanSubmenu: boolean = false;
+  
  
 
   constructor(private tabService: TabService, private router: Router, private kanban: KanbanService) {
@@ -39,24 +40,24 @@ export class NavbarComponent {
   }
 
   openNewTabWithData(i: number): void {
+
     this.tabService.welcome();
     let name= this.nombres[i]
-    if(i==-1){name='General'    }
-    const data = { label:name, content:'Hola' };
+    if(i==-1){name='General'}
+    const data = { label:name, content:i };
     this.tabService.openNewTab(data);
-    setTimeout(() =>{
-      this.router.navigate(['kanban', i])
-    }, 500)
-
+    setTimeout(()=>{
+    this.router.navigate(['kanban', i]);},100)
   }
+    
+  
   openNewTabWithDataGant(): void {
     this.tabService.welcome();
     const data = { label:'Gant', content:'Hola' };
     this.tabService.openNewTab(data);
     setTimeout(() => {
-    this.router.navigate(['gant']);},500)
-
-  }
+   this.router.navigate(['gant'])},150
+  )  }
   
 
   mouseenter() {

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { DxSortableTypes } from 'devextreme-angular/ui/sortable';
 import { KanbanService } from '../kanban.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
 import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
+import { TabService } from '../tab-service.service';
 
 
 
@@ -23,16 +24,18 @@ export class KanbanComponent implements OnInit{
   statusesStr = ['Estudio','Desarrollo','Test','Finalizado'];
   statusesInt = [0,1,2,3]
   nombres:any;
-  constructor(private service: KanbanService, private route: ActivatedRoute) {
-
-
+  constructor(private service: KanbanService, private route: ActivatedRoute, private tab:TabService) {
   }
   
   ngOnInit(): void {
-    this.i=this.route.snapshot.params['i']
-      this.selectProyecto(this.i);
-    
+    this.route.params.subscribe((data)=>{
+      this.i=data['i']
+    })
+    setTimeout(()=>{
+      this.selectProyecto(this.i)},200 )
   }
+
+
 
   dateClass() {
     return (date: Date): MatCalendarCellCssClasses => {
