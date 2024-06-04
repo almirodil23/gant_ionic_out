@@ -43,15 +43,15 @@
                   <div class="card-assignee">{{task.asignado}}</div>
                   <div class="suspensive">...</div>
 
-                  <div class="card-details" >
+                  <div class="card-details" (mouseenter)="daySelected(task.fechaIncio,task.fechaFin,calendar)">
                         <p>{{ task.arbol }}</p>
-                        <p class="fechas" (mouseenter)="fechas()">Fecha Inicio: {{task.fechaIncio}}</p>
-                        <p class="fechas">Fecha Fin: {{ task.fechaFin}}</p>
+                        <p class="fechas" (click)="showDate($event)">Fecha Inicio: {{task.fechaIncio}}</p>
                         <div class="graf">
                           <mat-card class="container-fluid">
-                            <mat-calendar [dateClass]="dateClass()"></mat-calendar>
+                            <mat-calendar #calendar  [dateClass]="dateClass"></mat-calendar>
                           </mat-card>
                         </div>
+                        <p class="fechas">Fecha Fin: {{ task.fechaFin}}</p>
                         <p class="horas">Horas Estimadas: {{ task.horasEstimadas }}</p>
                         <p class="horas">Horas Realizadas: {{ task.horasRealizadas }}</p>
                         </div>
@@ -66,3 +66,4 @@
         </div>
       </div>
     </div>
+

@@ -1,9 +1,9 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
 import { DxSortableTypes } from 'devextreme-angular/ui/sortable';
 import { KanbanService } from '../kanban.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
-import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
+import { MatCalendarCellClassFunction, MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { TabService } from '../tab-service.service';
 
 
@@ -11,7 +11,9 @@ import { TabService } from '../tab-service.service';
 @Component({
   selector: 'app-kanban',
   templateUrl: './kanban.component.html',
-  styleUrls: ['./kanban.component.scss']
+  styleUrls: ['./kanban.component.scss'],
+  encapsulation:ViewEncapsulation.None
+
 })
 
 
@@ -24,8 +26,64 @@ export class KanbanComponent implements OnInit{
   statusesStr = ['Estudio','Desarrollo','Test','Finalizado'];
   statusesInt = [0,1,2,3]
   nombres:any;
+  selectedDates: any[] = []; 
+
+
   constructor(private service: KanbanService, private route: ActivatedRoute, private tab:TabService) {
   }
+  
+
+  showDate(event: Event) {
+    const target = event.currentTarget as HTMLElement;
+    const cardDetails = target.closest('.card-details');
+    if (cardDetails) {
+      const grafElement = cardDetails.querySelector('.graf');
+      const showDateElement = cardDetails.querySelector('.showdate');
+  
+      if (grafElement) {
+        grafElement.classList.replace('graf', 'showdate');
+      } else if (showDateElement) {
+        showDateElement.classList.replace('showdate', 'graf');
+      }
+    }
+  }
+  
+
+dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
+  if (view == 'month') {
+    let dateToFind = this.getDateOnly(cellDate)
+    let i = this.selectedDates.indexOf(dateToFind)
+    console.log('n')
+
+    if (this.selectedDates.filter(data=>{dateToFind===this.getDateOnly(data)})) {
+      return 'selected'
+    }
+  }
+  return ''
+}
+
+
+daySelected(inicio: Date ,fin: Date,calendar: any) {
+   var loop = new Date(inicio);
+   var end = new Date(fin)
+   for (var i=0;i>=0;i++){  
+    var newDate = loop.setDate(loop.getDate() + 1);
+    if(loop.getTime()!==end.getTime()){
+     loop = new Date(newDate);
+     this.selectedDates.push(loop)
+    }
+     else{
+      break
+     }
+  }
+ 
+}
+
+getDateOnly(date: Date):string {
+  return new Date(date).toISOString().split('T')[0];
+}
+
+
   
   ngOnInit(): void {
     this.route.params.subscribe((data)=>{
@@ -36,16 +94,6 @@ export class KanbanComponent implements OnInit{
   }
 
 
-
-  dateClass() {
-    return (date: Date): MatCalendarCellCssClasses => {
-      if (date.getDate() === 1) {
-        return 'special-date';
-      } else {
-        return 'container';
-      }
-    };
-  }
 
   getNombres(){
     this.nombres=this.service.getNames()
