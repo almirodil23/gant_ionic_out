@@ -16,7 +16,8 @@
   */
   .list {
     border-radius: 8px;
-    margin: 5px;
+    margin: 9px;
+    margin-bottom: 10%;
     background-color: rgba(192, 192, 192, 0.4);
     display: inline-block;
     vertical-align: top;
@@ -45,7 +46,7 @@
   }
   
   .horas{
-    background-color: #edc578;
+    background-color: #ffc107
   }
   
   .fechas{
@@ -53,14 +54,12 @@
   }
   
   .list-title {
-    font-size: 16px;
+    font-size: 20px;
     padding: 10px;
     padding-left: 30px;
     margin-bottom: -10px;
-    font-weight: bold;
     cursor: pointer;
   }
-
 
 
   .scrollable-list {

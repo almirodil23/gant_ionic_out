@@ -5,6 +5,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
 import { MatCalendarCellClassFunction, MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { TabService } from '../tab-service.service';
+import { FormControl, FormGroup } from '@angular/forms';
+
 
 
 
@@ -27,14 +29,18 @@ export class KanbanComponent implements OnInit{
   statusesInt = [0,1,2,3]
   nombres:any;
   selectedDates: any[] = []; 
-
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
 
   constructor(private service: KanbanService, private route: ActivatedRoute, private tab:TabService) {
   }
   
 
   showDate(event: Event) {
-    const target = event.currentTarget as HTMLElement;
+
+  /*const target = event.currentTarget as HTMLElement;
     const cardDetails = target.closest('.card-details');
     if (cardDetails) {
       const grafElement = cardDetails.querySelector('.graf');
@@ -46,10 +52,11 @@ export class KanbanComponent implements OnInit{
         showDateElement.classList.replace('showdate', 'graf');
       }
     }
+    */
   }
   
 
-dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
+/*dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
   if (view == 'month') {
     let dateToFind = this.getDateOnly(cellDate)
     let i = this.selectedDates.indexOf(dateToFind)
@@ -61,22 +68,14 @@ dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
   }
   return ''
 }
-
+*/
 
 daySelected(inicio: Date ,fin: Date,calendar: any) {
+  this.selectedDates=[]
    var loop = new Date(inicio);
    var end = new Date(fin)
-   for (var i=0;i>=0;i++){  
-    var newDate = loop.setDate(loop.getDate() + 1);
-    if(loop.getTime()!==end.getTime()){
-     loop = new Date(newDate);
-     this.selectedDates.push(loop)
-    }
-     else{
-      break
-     }
-  }
- 
+  this.range.setValue({start:inicio,end:fin})
+
 }
 
 getDateOnly(date: Date):string {

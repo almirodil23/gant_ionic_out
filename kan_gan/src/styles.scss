@@ -39,7 +39,11 @@ margin: 0;
 }
 
 .cdk-drag.drag-box{
-  color:black
+  color: white
+}
+
+.list-title.dx-theme-text-color{
+  color:white !important;
 }
 
 .mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-link:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline{
@@ -125,7 +129,7 @@ white-space: nowrap;
   height: 80% !important;
   width: 100% !important;
   align-self: self-end;
-  background-color: rgb(211, 227, 253);
+  background-color:125, 132, 138;
   color: black !important;
   max-width: 15%;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -151,7 +155,7 @@ div{  text-overflow:ellipsis !important;
 }
 
 .mat-icon:hover{
-  background-color: white;
+  background-color: #4c5245;
   border-radius: 10px !important;
 
 }
@@ -179,19 +183,19 @@ float: right;
   width:100% !important;
   align-self: self-end;
   padding-top: 2%;
-  background-color:rgba(211,227,253,255);
+  background-color:125, 132, 138;
 
  }
 
  .tab-container{
-  background-color:rgba(211,227,253,255);
+  background-color:125, 132, 138;
 
  }
 
 .mat-mdc-tab-body-wrapper{
   min-height: 100% !important;
-  padding:4%;
-  background-color: white;
+  padding:2%;
+  background-color: #4c5245;
   border-radius: 
   5px 5px 0 0 !important;
 
@@ -227,7 +231,7 @@ float: right;
 }
 
 .mdc-tab--active {
-  background-color: white !important;
+  background-color: #4c5245;
   border-radius: 10px 10px 0 0 !important;
   opacity: 1;
 }
@@ -236,7 +240,7 @@ float: right;
   background-color: var(--bs-body-color) !important;
 }
 .btn-ligth-inverted :hover{
-  background-color: white;
+  background-color: #4c5245;
 }
 
 .mat-tab-header{
@@ -246,11 +250,8 @@ float: right;
   overflow: visible !important;
 }
 
-.mat-calendar-body-cell.selected 
-{
-  background-color:red!important;
-  border-radius: 50%
-}
+
+
 
 .graf{
   display:none
@@ -263,10 +264,22 @@ float: right;
 /*.fechas:hover ~ .graf {
   display: block;
 }*/
+.mat-mdc-text-field-wrapper.mdc-text-field--filled{
+  background-color: rgba(192, 192, 192, 0.4);
+}
 
+.mat-calendar-body-selected{
+  background-color: #4c5245;
+}
 
 .mat-tab-group.mat-primary .mat-ink-bar{
   background-color: aqua;
+}
+
+
+/*color de la letra de picker*/
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label{
+  color:black;
 }
 
 
@@ -275,14 +288,23 @@ float: right;
  width:100%;
 }
 
-
+.mdc-tab{
+  border-radius: 10px 10px 0 0 !important;
+  background-color: #4c5245 !important;
+}
 
 .mat-mdc-tab-labels{
   padding-left: 3%;
   border-radius: 0 0 0 0 !important;
 }
+::ng-deep.mat-tab-label-active{
 
+    background-color: #4c52458c;
+}
 
+text{
+  fill:#fff !important;
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -291,3 +313,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .special-date {
   background-color: red;
 }
+
+
+/*special color #4c5245*/

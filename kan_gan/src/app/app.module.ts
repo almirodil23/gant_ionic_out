@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatListModule } from '@angular/material/list';
-import { CommonModule } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 
@@ -32,6 +32,7 @@ import { GraficoService } from './grafico/grafico.service';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -79,7 +80,12 @@ import { MatNativeDateModule } from '@angular/material/core';
     DxChartModule,
     MatDatepickerModule,
     MatCardModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    FormsModule, 
+    ReactiveFormsModule, 
+    JsonPipe,
+    MatFormFieldModule,
+
   
 
   
