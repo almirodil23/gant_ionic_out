@@ -1,8 +1,9 @@
-import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnChanges, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TabService } from '../tab-service.service';
 import { CdkDragDrop, moveItemInArray, CdkDragSortEvent } from '@angular/cdk/drag-drop';
 import { SelectionModel } from '@angular/cdk/collections';
+import { MatTabGroup } from '@angular/material/tabs';
 
 
 interface Tab {
@@ -30,11 +31,13 @@ export class TabComponent implements OnChanges {
   selectAfterAdding: HTMLInputElement | undefined; 
   private selection = new SelectionModel();
   showWelcomeMessage = true; 
+  @ViewChildren('tabContent', { read: ElementRef }) tabContents!: QueryList<ElementRef>;
+
 
   constructor(public tabService: TabService) {
     this.tabService.getNewTabObservable().subscribe((data) => {
       this.addTab(data);
-      console.log(this.showWelcomeMessage)   });
+  });
   this.tabService.showWelcomeMessage$.subscribe((showWelcome) => {
     this.showWelcomeMessage = showWelcome;
   });
@@ -69,11 +72,27 @@ export class TabComponent implements OnChanges {
     this.exe=false
   }
 
-  closeTab(index: number): void {
+  closeTab(index: number): void { 
+    const tabId = this.tabs[index].id;
+
+    // Captura el HTML actual del contenido de la pestaña
+    const currentHtml = this.getCurrentTabHtml(index);
+
+    // Guarda el HTML en el servicio
+    this.tabService.saveTabHtml(tabId, currentHtml);
     this.tabs.splice(index, 1);
   }
 
+  getCurrentTabHtml(index: number): string {
+    const tabContent = this.tabContents.toArray()[index];
+    return tabContent ? tabContent.nativeElement.innerHTML : '';
+  }
 
+
+  restoreTabHtml(tabId: string): string {
+    return this.tabService.getTabHtml(tabId);
+  }
+  
   getAllListConnections(index: number): string[] {
     const connections: string[] = [];
 
@@ -93,6 +112,12 @@ export class TabComponent implements OnChanges {
       
   
     return connections;
+  }
+
+  dropped(event: CdkDragDrop<any>, t: MatTabGroup): void {
+    const arr = t._tabs.toArray();
+    moveItemInArray(arr, event.previousIndex, event.currentIndex);
+    t._tabs.reset(arr);
   }
 
   drop(event: CdkDragDrop<string[]>): void {

@@ -32,4 +32,18 @@ export class TabService {
     return this.newTabSubject.asObservable();
     
   }
+
+  private tabHtmlStates: { [key: string]: string } = {};
+
+  saveTabHtml(tabId: string, html: string) {
+    this.tabHtmlStates[tabId] = html;
+  }
+
+  getTabHtml(tabId: string): string {
+    return this.tabHtmlStates[tabId];
+  }
+
+  removeTabHtml(tabId: string) {
+    delete this.tabHtmlStates[tabId];
+  }
 }

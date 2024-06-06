@@ -1,68 +1,74 @@
 <div class="container-fluid">
-    <div id="kanban">
-      <dx-scroll-view
-        class="scrollable-board"
-        direction="horizontal"
-        showScrollbar="always"
+  <div id="kanban">
+    <dx-scroll-view
+      class="scrollable-board"
+      direction="horizontal"
+      showScrollbar="always"
+    >
+      <dx-sortable
+      class="sortable-lists"
+        itemOrientation="horizontal"
+        handle=".list-title"
+        (onReorder)="onListReorder($event)"
+        
+        
       >
-        <dx-sortable
-        class="sortable-lists"
-          itemOrientation="horizontal"
-          handle=".list-title"
-          (onReorder)="onListReorder($event)"
-          
-          
-        >
-          <div class="list" *ngFor="let list of lists; let listIndex = index">
-            <div class="list-title dx-theme-text-color">{{
-              statusesStr [listIndex]
-            }}</div>
-            <dx-scroll-view
-              class="scrollable-list"
-              direction="vertical"
-              showScrollbar="always"
-  
+        <div class="list" *ngFor="let list of lists; let listIndex = index">
+          <div class="list-title dx-theme-text-color">{{
+            statusesStr [listIndex]
+          }}</div>
+          <dx-scroll-view
+            class="scrollable-list"
+            direction="vertical"
+            showScrollbar="always"
+
+          >
+            <dx-sortable
+              class="sortable-cards"
+              group="cardsGroup"
+              [data]="list"
+              (onDragStart)="onTaskDragStart($event)"
+              (onReorder)="onTaskDrop($event)"
+              (onAdd)="onTaskDrop($event)"
             >
-              <dx-sortable
-                class="sortable-cards"
-                group="cardsGroup"
-                [data]="list"
-                (onDragStart)="onTaskDragStart($event)"
-                (onReorder)="onTaskDrop($event)"
-                (onAdd)="onTaskDrop($event)"
+              <div
+                class="card dx-card dx-theme-text-color dx-theme-background-color"
+                *ngFor="let task of list"
               >
                 <div
-                  class="card dx-card dx-theme-text-color dx-theme-background-color"
-                  *ngFor="let task of list"
-                >
-                  <div
-                    class="card-priority"
-                    [ngClass]="'priority-' + task.estado"
-                  ></div>
-                  <div class="card-subject">{{ task.nombre }}</div>
-                  <div class="card-assignee">{{task.asignado}}</div>
-                  <div class="suspensive">...</div>
+                  class="card-priority"
+                  [ngClass]="'priority-' + task.estado"
+                ></div>
+                <div class="card-subject">{{ task.nombre }}</div>
+                <div class="card-assignee">{{task.asignado}}</div>
+                <div class="suspensive">...</div>
 
-                  <div class="card-details" >
-                        <p>{{ task.arbol }}</p>
-                        <p class="fechas" (mouseenter)="fechas()">Fecha Inicio: {{task.fechaIncio}}</p>
-                        <p class="fechas">Fecha Fin: {{ task.fechaFin}}</p>
-                        <div class="graf">
-                          <mat-card class="container-fluid">
-                            <mat-calendar [dateClass]="dateClass()"></mat-calendar>
-                          </mat-card>
-                        </div>
-                        <p class="horas">Horas Estimadas: {{ task.horasEstimadas }}</p>
-                        <p class="horas">Horas Realizadas: {{ task.horasRealizadas }}</p>
-                        </div>
-                  </div>
-                </dx-sortable>
-              </dx-scroll-view>
-            </div>
-          </dx-sortable>
-        </dx-scroll-view>
-        <div class="container">
-          <button type="button" class="btn btn-warning" (click)="salvado(i)">Guardar</button>
-        </div>
+                <div class="card-details" (mousemove)="daySelected(task.fechaIncio,task.fechaFin,picker)">
+                      <p>{{ task.arbol }}</p>
+                      <div>
+                      <div class="showdate">
+                        <mat-form-field class="picker">
+                          <mat-label>Plazos</mat-label>
+                          <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                            <input matStartDate formControlName="start" placeholder="Start date">
+                            <input matEndDate formControlName="end" placeholder="End date">
+                          </mat-date-range-input>
+                          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-date-range-picker #picker></mat-date-range-picker>
+                        </mat-form-field>
+                      </div>
+                      </div>
+                      <p class="horas">Horas Estimadas: {{ task.horasEstimadas }}</p>
+                      <p class="horas">Horas Realizadas: {{ task.horasRealizadas }}</p>
+                      </div>
+                </div>
+              </dx-sortable>
+            </dx-scroll-view>
+          </div>
+        </dx-sortable>
+      </dx-scroll-view>
+      <div class="container">
+        <button type="button" class="btn btn-warning" (click)="salvado(i)">Guardar</button>
       </div>
     </div>
+  </div>

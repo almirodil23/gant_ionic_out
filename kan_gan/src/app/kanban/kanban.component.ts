@@ -5,6 +5,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
 import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { TabService } from '../tab-service.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 
@@ -24,6 +25,11 @@ export class KanbanComponent implements OnInit{
   statusesStr = ['Estudio','Desarrollo','Test','Finalizado'];
   statusesInt = [0,1,2,3]
   nombres:any;
+  selectedDates: any[] = []; 
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
   constructor(private service: KanbanService, private route: ActivatedRoute, private tab:TabService) {
   }
   
@@ -68,7 +74,17 @@ export class KanbanComponent implements OnInit{
     };
   }
  
-
+  daySelected(inicio: Date ,fin: Date,calendar: any) {
+    this.selectedDates=[]
+     var loop = new Date(inicio);
+     var end = new Date(fin)
+    this.range.setValue({start:inicio,end:fin})
+  
+  }
+  
+  getDateOnly(date: Date):string {
+    return new Date(date).toISOString().split('T')[0];
+  }
   
   onListReorder(e: DxSortableTypes.ReorderEvent) {
     const list = this.lists.splice(e.fromIndex, 1)[0];

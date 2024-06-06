@@ -6,9 +6,10 @@
   </ng-container>
   <ng-container *ngIf="!showWelcomeMessage">
     <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+      <button (click)="restoreTabHtml"></button>
       <mat-tab *ngFor="let tab of tabs; let i = index" >
                    
-        <ng-template mat-tab-label>
+        <ng-template mat-tab-label class="drag-box">
             
           <div
             [id]="'tab-' + i"
@@ -30,9 +31,14 @@
              </div>
 
         </ng-template>
+        <div #tabContent>
         <router-outlet></router-outlet>
+      </div>
       </mat-tab>
     </mat-tab-group>
   </ng-container>
   </div>
+  
+
+
   

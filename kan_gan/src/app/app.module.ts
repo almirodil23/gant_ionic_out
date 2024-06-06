@@ -32,6 +32,7 @@ import { GraficoService } from './grafico/grafico.service';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -79,7 +80,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     DxChartModule,
     MatDatepickerModule,
     MatCardModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatFormFieldModule
   
 
   
