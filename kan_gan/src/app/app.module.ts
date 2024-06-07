@@ -33,6 +33,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { FormComponent } from './form/form.component';
 
 
 
@@ -45,7 +46,8 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
     TabComponent,
     KanbanComponent,
     GanttComponent,
-    GraficoComponent
+    GraficoComponent,
+    FormComponent
     
   
   ],

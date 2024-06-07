@@ -1,0 +1,34 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()"*ngIf="!completado  ">
+    <div>
+      <label for="name">Name:</label>
+      <input id="name" formControlName="name">
+      <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+        <small *ngIf="userForm.get('name')?.errors?.['required']">Name is required.</small>
+        <small *ngIf="userForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters long.</small>
+    </div>
+    </div>
+  
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email">
+      <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+        <small *ngIf="userForm.get('email')?.errors?.['required']">Email is required.</small>
+        <small *ngIf="userForm.get('email')?.errors?.['email']">Invalid email address.</small>
+    </div>
+    </div>
+  
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password">
+      <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+        <small *ngIf="userForm.get('password')?.errors?.['required']">Password is required.</small>
+        <small *ngIf="userForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</small>
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="userForm.invalid">Submit</button>
+  </form>
+  <div *ngIf="completado">
+    Formulario enviado correctamente. Puedes cerrar esta pestaña!
+  </div>
+  

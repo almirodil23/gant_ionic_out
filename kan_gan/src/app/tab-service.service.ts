@@ -11,6 +11,9 @@ export class TabService {
 
 
   private newTabSubject = new BehaviorSubject<boolean>(false);
+
+
+  private history = new Subject<any>;
    
   constructor() { }
 
@@ -27,23 +30,33 @@ export class TabService {
     this.newTabSubject.next(data);
     
   }
+  
 
   getNewTabObservable(): Observable<any> {
     return this.newTabSubject.asObservable();
     
   }
 
-  private tabHtmlStates: { [key: string]: string } = {};
-
-  saveTabHtml(tabId: string, html: string) {
-    this.tabHtmlStates[tabId] = html;
+  setMenuState(menu: string, data: any) {
+    localStorage.setItem(menu, JSON.stringify(data));
+    let tab={menu,data}
+    console.log(tab)
+    this.history.next(tab)
   }
 
-  getTabHtml(tabId: string): string {
-    return this.tabHtmlStates[tabId];
+  getStates(): Observable<any>{
+    return this.history.asObservable();
+  }
+  
+
+  getMenuState(menu: string): boolean {
+    const state = localStorage.getItem(menu);
+    return state ? JSON.parse(state) : false;
   }
 
-  removeTabHtml(tabId: string) {
-    delete this.tabHtmlStates[tabId];
-  }
+
+
 }
+
+
+

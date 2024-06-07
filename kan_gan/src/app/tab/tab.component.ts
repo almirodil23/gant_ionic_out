@@ -31,6 +31,7 @@ export class TabComponent implements OnChanges {
   selectAfterAdding: HTMLInputElement | undefined; 
   private selection = new SelectionModel();
   showWelcomeMessage = true; 
+  restaurar: any[] = [];
   @ViewChildren('tabContent', { read: ElementRef }) tabContents!: QueryList<ElementRef>;
 
 
@@ -41,6 +42,9 @@ export class TabComponent implements OnChanges {
   this.tabService.showWelcomeMessage$.subscribe((showWelcome) => {
     this.showWelcomeMessage = showWelcome;
   });
+   this.tabService.getStates().subscribe((restore)=>{
+    this.restaurar.push(restore)
+   })
   if (this.tabs[0]==false){this.tabs.shift()}}
 
 
@@ -72,26 +76,16 @@ export class TabComponent implements OnChanges {
     this.exe=false
   }
 
-  closeTab(index: number): void { 
-    const tabId = this.tabs[index].id;
+  closeTab(index: number): void {
+    let tabId= this.tabs[this.tabs.length-1]
 
-    // Captura el HTML actual del contenido de la pestaña
-    const currentHtml = this.getCurrentTabHtml(index);
-
-    // Guarda el HTML en el servicio
-    this.tabService.saveTabHtml(tabId, currentHtml);
+    if (tabId.label !='Formulario'){ /*control de formulario ya que se adiere al servicio por su cuenta*/ 
+    this.tabService.setMenuState(tabId.label,tabId)} 
     this.tabs.splice(index, 1);
-  }
 
-  getCurrentTabHtml(index: number): string {
-    const tabContent = this.tabContents.toArray()[index];
-    return tabContent ? tabContent.nativeElement.innerHTML : '';
   }
 
 
-  restoreTabHtml(tabId: string): string {
-    return this.tabService.getTabHtml(tabId);
-  }
   
   getAllListConnections(index: number): string[] {
     const connections: string[] = [];
