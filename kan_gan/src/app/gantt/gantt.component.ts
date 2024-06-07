@@ -6,15 +6,18 @@ import { GanttService, Task } from './gantt.service';
 @Component({
   selector: 'app-gantt',
   templateUrl: './gantt.component.html',
-  styleUrls: ['./gantt.component.scss']
+  styleUrls: ['./gantt.component.scss'],
 })
 export class GanttComponent {
-
   tasks: Task[] = [];
-  fechaComienzo: Date = new Date("2030-01-01");
-  fechaFinal: Date = new Date("1970-01-01");
+  fechaComienzo: Date = new Date('2030-01-01');
+  fechaFinal: Date = new Date('1970-01-01');
 
-  constructor(private route: ActivatedRoute, private router: Router, ganttService: GanttService) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    ganttService: GanttService,
+  ) {
     this.tasks = ganttService.getProyectos();
     for (let task of this.tasks) {
       if (task.start) {
@@ -30,7 +33,6 @@ export class GanttComponent {
     }
   }
 
-  //Da estilo con colores al azar
   getTaskColor(taskId: number) {
     const color = taskId % 7;
     return `custom-task-color-${color}`;
@@ -42,10 +44,8 @@ export class GanttComponent {
 
   verProyecto(event: TaskClickEvent) {
     if (event.data.start) {
-      let nombreProyecto = this.tasks.find(x => x.id == event.data.parentId)?.title
+      let nombreProyecto = this.tasks.find((x) => x.id == event.data.parentId)?.title;
       this.router.navigate(['grafico/' + nombreProyecto?.toLowerCase()], { relativeTo: this.route });
     }
-
   }
-
 }

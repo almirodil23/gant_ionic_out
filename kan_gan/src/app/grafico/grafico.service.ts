@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as archivo from '../../assets/kanban.json'
+import * as archivo from '../../assets/kanban.json';
 
 export class Grafico {
   nombre!: string;
@@ -9,13 +9,11 @@ export class Grafico {
   horasRealizadas!: number;
 }
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GraficoService {
-
-  constructor() { }
+  constructor() {}
 
   getGraficosProyecto(nombreProyecto: string) {
     let data = archivo;
@@ -32,7 +30,7 @@ export class GraficoService {
           nombre: rama.nombre,
           horasEstimadas: rama.horasEstimadas,
           horasRealizadas: rama.horasRealizadas,
-        })
+        });
       }
     }
     return graficos;

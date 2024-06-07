@@ -1,76 +1,85 @@
-<mat-sidenav-container class="example-container" style="width:100%; height: 100%;" autosize>
+<mat-sidenav-container class="example-container" style="width: 100%; height: 100%" autosize>
   <mat-sidenav
     #sidenav
     class="example-sidenav"
     mode="side"
     opened="true"
-    style="width: 20%; height: 100%;"
+    style="width: 20%; height: 100%"
     (mouseenter)="mouseenter()"
     (mouseleave)="mouseleave()"
   >
     <mat-nav-list>
-      <mat-list-item
-        (click)="showSubmenu = !showSubmenu"
-        class="parent"
-        style="padding: 0; min-height: 12vh;"
-      >
-        <span
-          class="full-width"
-          style="display: flex; justify-content: space-around;"
-          *ngIf="isExpanded || isShowing"
-        >Menu <mat-icon mat-list-icon>home</mat-icon></span>
+      <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent" style="padding: 0; min-height: 12vh">
+        <span class="full-width" style="display: flex; justify-content: space-around" *ngIf="isExpanded || isShowing"
+          >Menu <mat-icon mat-list-icon>home</mat-icon></span
+        >
         <div class="icons">
-          <mat-icon
-            class="menu-button"
-            [ngClass]="{ 'rotated': showSubmenu }"
-            *ngIf="isExpanded || isShowing"
-          >expand_more</mat-icon>
+          <mat-icon class="menu-button" [ngClass]="{ rotated: showSubmenu }" *ngIf="isExpanded || isShowing"
+            >expand_more</mat-icon
+          >
         </div>
       </mat-list-item>
 
-         
-       <div class="submenu" [ngClass]="{ 'expanded': showSubmenu }" *ngIf="isShowing || isExpanded" style="padding: 0;">
-               <mat-list-item (click)="openForm();"class="parent">
-                <span>Form</span>
-               </mat-list-item>
-              </div>  
+      <div class="submenu" [ngClass]="{ expanded: showSubmenu }" *ngIf="isShowing || isExpanded" style="padding: 0">
+        <mat-list-item (click)="openForm()" class="parent">
+          <span>Form</span>
+        </mat-list-item>
+      </div>
 
-      <div class="submenu" [ngClass]="{ 'expanded': showSubmenu }" *ngIf="isShowing || isExpanded" style="padding: 0;">
-        <mat-list-item (click)="openNewTabWithDataGant();" class="parent">
+      <div class="submenu" [ngClass]="{ expanded: showSubmenu }" *ngIf="isShowing || isExpanded" style="padding: 0">
+        <mat-list-item (click)="openNewTabWithDataGant()" class="parent">
           <span class="full-width" *ngIf="isExpanded1 || isShowing1">Gant</span>
         </mat-list-item>
 
         <mat-list-item (click)="showKanbanSubmenu = !showKanbanSubmenu" class="parent">
           <span class="full-width" *ngIf="isExpanded || isShowing">Kanban</span>
-          <mat-icon class="menu-button" [ngClass]="{ 'rotated': showKanbanSubmenu }" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+          <mat-icon class="menu-button" [ngClass]="{ rotated: showKanbanSubmenu }" *ngIf="isExpanded || isShowing"
+            >expand_more</mat-icon
+          >
         </mat-list-item>
 
-        <div class="submenu" [ngClass]="{ 'expanded': showKanbanSubmenu }" *ngIf="isShowing || isExpanded" style="padding: 0;">
-          <div style="display:flex; flex-direction: column; justify-content: end; align-items: center; margin-top: 3%;">
-            <mat-list-item (click)="openNewTabWithData(-1);" style="padding-left: 6vw;">General</mat-list-item>
-            <mat-list-item *ngFor="let nombre of nombres; let i = index;" (click)="openNewTabWithData(i);" style="padding-left: 6vw;">{{nombre}}</mat-list-item>
+        <div
+          class="submenu"
+          [ngClass]="{ expanded: showKanbanSubmenu }"
+          *ngIf="isShowing || isExpanded"
+          style="padding: 0"
+        >
+          <div style="display: flex; flex-direction: column; justify-content: end; align-items: center; margin-top: 3%">
+            <mat-list-item (click)="openNewTabWithData(-1)" style="padding-left: 6vw">General</mat-list-item>
+            <mat-list-item
+              *ngFor="let nombre of nombres; let i = index"
+              (click)="openNewTabWithData(i)"
+              style="padding-left: 6vw"
+              >{{ nombre }}</mat-list-item
+            >
           </div>
         </div>
       </div>
     </mat-nav-list>
 
-
-
-
     <mat-nav-list>
       <mat-list-item (click)="showRestaurarSubmenu = !showRestaurarSubmenu" class="parent">
         <span class="full-width" *ngIf="isExpanded || isShowing">Restaurar pestañas</span>
-        <mat-icon class="menu-button" [ngClass]="{ 'rotated': showRestaurarSubmenu }" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+        <mat-icon class="menu-button" [ngClass]="{ rotated: showRestaurarSubmenu }" *ngIf="isExpanded || isShowing"
+          >expand_more</mat-icon
+        >
       </mat-list-item>
-      <div class="submenu" [ngClass]="{ 'expanded': showRestaurarSubmenu }" *ngIf="isShowing || isExpanded" style="padding: 0;">
-        <div style="display:flex; flex-direction: column; justify-content: end; align-items: center; margin-top: 3%;">
-          <mat-list-item *ngFor="let data of restaurar; let i = index;" (click)="restore(i)" style="padding-left: 6vw;">{{data.menu}}</mat-list-item>
+      <div
+        class="submenu"
+        [ngClass]="{ expanded: showRestaurarSubmenu }"
+        *ngIf="isShowing || isExpanded"
+        style="padding: 0"
+      >
+        <div style="display: flex; flex-direction: column; justify-content: end; align-items: center; margin-top: 3%">
+          <mat-list-item *ngFor="let data of restaurar; let i = index" (click)="restore(i)" style="padding-left: 6vw">{{
+            data.menu
+          }}</mat-list-item>
         </div>
       </div>
     </mat-nav-list>
   </mat-sidenav>
 
   <div class="example-sidenav-content">
-    <app-tab style="width: 100%;"></app-tab>
+    <app-tab style="width: 100%"></app-tab>
   </div>
 </mat-sidenav-container>

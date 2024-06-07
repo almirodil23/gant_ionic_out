@@ -5,22 +5,20 @@ import { Grafico, GraficoService } from './grafico.service';
 @Component({
   selector: 'app-grafico',
   templateUrl: './grafico.component.html',
-  styleUrls: ['./grafico.component.scss']
+  styleUrls: ['./grafico.component.scss'],
 })
 export class GraficoComponent implements OnInit {
-
   graficos: Grafico[] = [];
-  nombreProyecto: string = "";
-  constructor(private route: ActivatedRoute, private service: GraficoService) {
-
-  }
+  nombreProyecto: string = '';
+  constructor(
+    private route: ActivatedRoute,
+    private service: GraficoService,
+  ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.nombreProyecto = params['nP'];
-      }
-    )
+    this.route.params.subscribe((params: Params) => {
+      this.nombreProyecto = params['nP'];
+    });
     this.graficos = this.service.getGraficosProyecto(this.nombreProyecto);
   }
 
@@ -32,25 +30,22 @@ export class GraficoComponent implements OnInit {
     console.log(e);
   }
   customizePoint(a: any) {
-    if (a.seriesName == "Horas Realizadas") {
+    if (a.seriesName == 'Horas Realizadas') {
       if (a.data.horasEstimadas == a.data.horasRealizadas) {
-        return { color: '#FF8000', }
+        return { color: '#FF8000' };
       } else if (a.data.horasEstimadas < a.data.horasRealizadas) {
         return { color: '#ff0000' };
-      }
-      else {
-        return { color: '#008f39' }
+      } else {
+        return { color: '#008f39' };
       }
     }
-    return { color: '#0000ff' }
+    return { color: '#0000ff' };
   }
   sortLegendItems(items: any) {
     if (items.length != 0) {
-      items[0].marker.fill = "#0000ff";
-      items[1].marker.fill = "#00ff00";
+      items[0].marker.fill = '#0000ff';
+      items[1].marker.fill = '#00ff00';
       console.log(items);
     }
-
   }
-
 }

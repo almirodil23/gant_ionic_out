@@ -5,88 +5,78 @@ import { CdkDragDrop, moveItemInArray, CdkDragSortEvent } from '@angular/cdk/dra
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTabGroup } from '@angular/material/tabs';
 
-
 interface Tab {
   label: string;
   content: string;
 }
 
-
 @Component({
   selector: 'app-tab',
   templateUrl: './tab.component.html',
-  styleUrls: ['./tab.component.scss']
+  styleUrls: ['./tab.component.scss'],
 })
-
-
 export class TabComponent implements OnChanges {
-  isKanbanVisible:boolean=false;
-  isProovedorVisible:boolean=false
+  isKanbanVisible: boolean = false;
+  isProovedorVisible: boolean = false;
   data: any;
-  id:number|any;
-  exe=false
-  tabs:any = [];
+  id: number | any;
+  exe = false;
+  tabs: any = [];
   selected = new FormControl(0);
   selectedTab: number | null = null;
-  selectAfterAdding: HTMLInputElement | undefined; 
+  selectAfterAdding: HTMLInputElement | undefined;
   private selection = new SelectionModel();
-  showWelcomeMessage = true; 
+  showWelcomeMessage = true;
   restaurar: any[] = [];
   @ViewChildren('tabContent', { read: ElementRef }) tabContents!: QueryList<ElementRef>;
-
 
   constructor(public tabService: TabService) {
     this.tabService.getNewTabObservable().subscribe((data) => {
       this.addTab(data);
-  });
-  this.tabService.showWelcomeMessage$.subscribe((showWelcome) => {
-    this.showWelcomeMessage = showWelcome;
-  });
-   this.tabService.getStates().subscribe((restore)=>{
-    this.restaurar.push(restore)
-   })
-  if (this.tabs[0]==false){this.tabs.shift()}}
-
-
-  
-  ngOnChanges(): void {
-   
- 
+    });
+    this.tabService.showWelcomeMessage$.subscribe((showWelcome) => {
+      this.showWelcomeMessage = showWelcome;
+    });
+    this.tabService.getStates().subscribe((restore) => {
+      this.restaurar.push(restore);
+    });
+    if (this.tabs[0] == false) {
+      this.tabs.shift();
+    }
   }
 
-  select(tab:any) { 
-     this.selection.select(this.tabs[0])
+  ngOnChanges(): void {}
+
+  select(tab: any) {
+    this.selection.select(this.tabs[0]);
 
     if (!this.selection.isSelected(tab)) {
       this.selection.clear();
       this.selection.select(tab);
-
     }
   }
 
-
-  isSelected(tab:any): boolean {
-      return this.selection.isSelected(tab);
-    }  
+  isSelected(tab: any): boolean {
+    return this.selection.isSelected(tab);
+  }
 
   addTab(data: { label: string; content: any }): void {
-    this.id=data.content
+    this.id = data.content;
     this.tabs.push(data);
-    this.isKanbanVisible=true
-    this.exe=false
+    this.isKanbanVisible = true;
+    this.exe = false;
   }
 
   closeTab(index: number): void {
-    let tabId= this.tabs[this.tabs.length-1]
+    let tabId = this.tabs[this.tabs.length - 1];
 
-    if (tabId.label !='Formulario'){ /*control de formulario ya que se adiere al servicio por su cuenta*/ 
-    this.tabService.setMenuState(tabId.label,tabId)} 
+    if (tabId.label != 'Formulario') {
+      /*control de formulario ya que se adiere al servicio por su cuenta*/
+      this.tabService.setMenuState(tabId.label, tabId);
+    }
     this.tabs.splice(index, 1);
-
   }
 
-
-  
   getAllListConnections(index: number): string[] {
     const connections: string[] = [];
 
@@ -97,14 +87,12 @@ export class TabComponent implements OnChanges {
     }
     if (!this.exe) {
       setTimeout(() => {
-          let tabs = document.getElementsByClassName('mdc-tab mat-mdc-tab mat-mdc-focus-indicator ng-star-inserted');
-          tabs[tabs.length - 1].dispatchEvent(new MouseEvent("click", {bubbles: true, cancelable: true, view: window}));
-          this.exe = true;
-      }, 100);}
-      
+        let tabs = document.getElementsByClassName('mdc-tab mat-mdc-tab mat-mdc-focus-indicator ng-star-inserted');
+        tabs[tabs.length - 1].dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+        this.exe = true;
+      }, 100);
+    }
 
-      
-  
     return connections;
   }
 

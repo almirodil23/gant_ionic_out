@@ -8,22 +8,21 @@ import { KanbanService } from '../kanban.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  
   nombres: any = [];
   tabs = [];
   selected = new FormControl(0);
   selectedTab: number | null = null;
-  selectAfterAdding: HTMLInputElement | undefined; 
-  showWelcomeMessage = true; 
+  selectAfterAdding: HTMLInputElement | undefined;
+  showWelcomeMessage = true;
 
   @ViewChild('sidenav') sidenav!: MatSidenavModule;
   isExpanded = true;
   isExpanded1 = true;
   isExpanded2 = true;
- 
+
   isShowing = false;
   isShowing1 = false;
   isShowing2 = false;
@@ -32,10 +31,14 @@ export class NavbarComponent {
   showGantSubmenu: boolean = false;
   showKanbanSubmenu: boolean = false;
   showRestaurarSubmenu: boolean = false;
-  
-  restaurar: any[] = []
 
-  constructor(private tabService: TabService, private router: Router, private kanban: KanbanService) {
+  restaurar: any[] = [];
+
+  constructor(
+    private tabService: TabService,
+    private router: Router,
+    private kanban: KanbanService,
+  ) {
     this.nombres = this.kanban.getNames();
     console.log(this.nombres);
 
@@ -45,9 +48,9 @@ export class NavbarComponent {
     });
   }
 
-  openForm(){
+  openForm() {
     this.tabService.welcome();
-    this.tabService.openNewTab({label:'Formulario',content:'testings'})
+    this.tabService.openNewTab({ label: 'Formulario', content: 'testings' });
     setTimeout(() => {
       this.router.navigate(['form']);
     }, 100);
@@ -56,7 +59,9 @@ export class NavbarComponent {
   openNewTabWithData(i: number): void {
     this.tabService.welcome();
     let name = this.nombres[i];
-    if (i == -1) { name = 'General'; }
+    if (i == -1) {
+      name = 'General';
+    }
     const data = { label: name, content: i };
     this.tabService.openNewTab(data);
     setTimeout(() => {
@@ -87,12 +92,13 @@ export class NavbarComponent {
 
   restore(i: number) {
     let date = this.restaurar[i];
+    console.log(date)
     if (date.menu === 'Gant') {
       this.openNewTabWithDataGant();
-    } else if(date.menu==='Kanban'){
-      this.openNewTabWithData(date.data.content);
+    } else if (date.menu === 'Formulario') {
+      this.openForm();
     } else {
-      this.openForm()
+      this.openNewTabWithData(date.data.content);
     }
     this.restaurar.splice(i, 1);
   }

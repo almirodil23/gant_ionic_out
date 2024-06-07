@@ -1,12 +1,10 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
-
-
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,13 +12,27 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';  
+import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TabComponent } from './tab/tab.component';
-import { MatCheckboxModule} from '@angular/material/checkbox';
-import {DragDropModule} from '@angular/cdk/drag-drop';
-import { DxBulletModule, DxChartComponent, DxChartModule, DxCheckBoxModule, DxDataGridModule, DxFormModule, DxGanttModule, DxPivotGridComponent, DxPivotGridModule, DxScrollViewModule, DxSelectBoxModule, DxSortableModule, DxTemplateModule } from 'devextreme-angular';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import {
+  DxBulletModule,
+  DxChartComponent,
+  DxChartModule,
+  DxCheckBoxModule,
+  DxDataGridModule,
+  DxFormModule,
+  DxGanttModule,
+  DxPivotGridComponent,
+  DxPivotGridModule,
+  DxScrollViewModule,
+  DxSelectBoxModule,
+  DxSortableModule,
+  DxTemplateModule,
+} from 'devextreme-angular';
 import { RouteReuseStrategy } from '@angular/router';
 import { KanbanComponent } from './kanban/kanban.component';
 import { KanbanService } from './kanban.service';
@@ -35,9 +47,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { FormComponent } from './form/form.component';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,9 +56,7 @@ import { FormComponent } from './form/form.component';
     KanbanComponent,
     GanttComponent,
     GraficoComponent,
-    FormComponent
-    
-  
+    FormComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +71,8 @@ import { FormComponent } from './form/form.component';
     FormsModule,
     MatCheckboxModule,
     DragDropModule,
-    CommonModule,DxBulletModule,
+    CommonModule,
+    DxBulletModule,
     DxDataGridModule,
     DxTemplateModule,
     ReactiveFormsModule,
@@ -83,13 +91,9 @@ import { FormComponent } from './form/form.component';
     MatDatepickerModule,
     MatCardModule,
     MatNativeDateModule,
-    MatFormFieldModule
-  
-
-  
-  
+    MatFormFieldModule,
   ],
-  providers: [KanbanService,GanttService,GraficoService],
-  bootstrap: [AppComponent]
+  providers: [KanbanService, GanttService, GraficoService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
