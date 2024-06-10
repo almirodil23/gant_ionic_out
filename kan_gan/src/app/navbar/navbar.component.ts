@@ -19,6 +19,7 @@ export class NavbarComponent {
   selectAfterAdding: HTMLInputElement | undefined;
  
   @ViewChild('sidenav') sidenav!: MatSidenavModule;
+  isExpandedSide=true;
   isExpanded = true;
   isExpanded1 = true;
   isExpanded2 = true;
@@ -94,6 +95,11 @@ export class NavbarComponent {
       this.openTab('Kanban',date.data.content);
     }
     this.restaurar.splice(i, 1);
+  }
+
+
+  toggleSidenav() {
+    this.isExpandedSide = !this.isExpandedSide;
   }
 
 }

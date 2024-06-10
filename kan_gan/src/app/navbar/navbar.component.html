@@ -3,18 +3,17 @@
     #sidenav
     class="example-sidenav"
     mode="side"
-    opened="true"
+    [opened]="isExpandedSide"
     style="width: 20%; height: 100%"
   >
     <mat-nav-list>
-      <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent" style="padding: 0; min-height: 12vh">
-        <span class="full-width" style="display: flex; justify-content: space-around" *ngIf="isExpanded || isShowing"
-          > <mat-icon mat-list-icon>home</mat-icon></span
-        >
+      <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent" style="padding: 0; height: 12vh">
+        <span class="full-width" style="display: flex; justify-content: space-around" *ngIf="isExpanded || isShowing">
+          <mat-icon mat-list-icon>home</mat-icon>
+          <mat-icon mat-list-icon style="margin-left:5vw;">expand_more</mat-icon>
+        </span>
         <div class="icons">
-          <mat-icon class="menu-button" [ngClass]="{ rotated: showSubmenu }" *ngIf="isExpanded || isShowing"
-            >expand_more</mat-icon
-          >
+
         </div>
       </mat-list-item>
 
@@ -31,25 +30,17 @@
 
         <mat-list-item (click)="showKanbanSubmenu = !showKanbanSubmenu" class="parent">
           <span class="full-width" *ngIf="isExpanded || isShowing">Kanban</span>
-          <mat-icon class="menu-button" [ngClass]="{ rotated: showKanbanSubmenu }" *ngIf="isExpanded || isShowing"
-            >expand_more</mat-icon
-          >
+          <mat-icon class="menu-button" [ngClass]="{ rotated: showKanbanSubmenu }" *ngIf="isExpanded || isShowing">
+            expand_more
+          </mat-icon>
         </mat-list-item>
 
-        <div
-          class="submenu"
-          [ngClass]="{ expanded: showKanbanSubmenu }"
-          *ngIf="isShowing || isExpanded"
-          style="padding: 0"
-        >
+        <div class="submenu" [ngClass]="{ expanded: showKanbanSubmenu }" *ngIf="isShowing || isExpanded" style="padding: 0">
           <div style="display: flex; flex-direction: column; justify-content: end; align-items: center; margin-top: 3%">
             <mat-list-item (click)="openTab('Kanban',-1)" style="padding-left: 6vw">General</mat-list-item>
-            <mat-list-item
-              *ngFor="let nombre of nombres; let i = index"
-              (click)="openTab('Kanban',i)"
-              style="padding-left: 6vw"
-              >{{ nombre }}</mat-list-item
-            >
+            <mat-list-item *ngFor="let nombre of nombres; let i = index" (click)="openTab('Kanban',i)" style="padding-left: 6vw">
+              {{ nombre }}
+            </mat-list-item>
           </div>
         </div>
       </div>
@@ -58,26 +49,23 @@
     <mat-nav-list>
       <mat-list-item (click)="showRestaurarSubmenu = !showRestaurarSubmenu" class="parent">
         <span class="full-width" *ngIf="isExpanded || isShowing">Restaurar pestañas</span>
-        <mat-icon class="menu-button" [ngClass]="{ rotated: showRestaurarSubmenu }" *ngIf="isExpanded || isShowing"
-          >expand_more</mat-icon
-        >
+        <mat-icon class="menu-button" [ngClass]="{ rotated: showRestaurarSubmenu }" *ngIf="isExpanded || isShowing">
+          expand_more
+        </mat-icon>
       </mat-list-item>
-      <div
-        class="submenu"
-        [ngClass]="{ expanded: showRestaurarSubmenu }"
-        *ngIf="isShowing || isExpanded"
-        style="padding: 0"
-      >
+      <div class="submenu" [ngClass]="{ expanded: showRestaurarSubmenu }" *ngIf="isShowing || isExpanded" style="padding: 0">
         <div style="display: flex; flex-direction: column; justify-content: end; align-items: center; margin-top: 3%">
-          <mat-list-item *ngFor="let data of restaurar; let i = index" (click)="restore(i)" style="padding-left: 6vw">{{
-            data.menu
-          }}</mat-list-item>
+          <mat-list-item *ngFor="let data of restaurar; let i = index" (click)="restore(i)" style="padding-left: 6vw">
+            {{ data.menu }}
+          </mat-list-item>
         </div>
       </div>
     </mat-nav-list>
   </mat-sidenav>
 
   <div class="example-sidenav-content">
+    <button mat-button (click)="toggleSidenav()" id="toggle" *ngIf="isExpandedSide"><mat-icon mat-list-icon>navigate_before</mat-icon></button>
+    <button mat-button (click)="toggleSidenav()" id="toggle" *ngIf="!isExpandedSide"><mat-icon mat-list-icon>navigate_next</mat-icon></button>
     <app-tab style="width: 100%"></app-tab>
   </div>
 </mat-sidenav-container>

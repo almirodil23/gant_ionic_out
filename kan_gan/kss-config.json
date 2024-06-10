@@ -1,0 +1,14 @@
+{
+    "//": "Las rutas de origen y destino son relativas a este archivo.",
+    "source": [
+      "src"
+    ],
+    "destination":  "styleguide/",
+    
+    "//": "Las rutas de css y js son URLs relativas a la guía de estilos generada.",
+    "css": [
+      "../src/styles.scss"
+    ],
+    "js": []
+  }
+  

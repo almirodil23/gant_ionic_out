@@ -1,4 +1,18 @@
-body {
+/**
+ * Global Styles
+ *
+ * General styles applied to the entire document.
+ */
+
+/*
+ * @section Body
+ * The main body styles.
+ *
+ * Markup:
+ * <body>
+ */
+ 
+ body {
   display: flex;
   width: 100vw;
   height: 100vh;
@@ -13,14 +27,31 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
+/*
+ * @section App Root
+ * Styles for the root application element.
+ *
+ * Markup:
+ * <app-root>
+ */
 app-root {
   display: flex;
   width: 100%;
 }
 
+/*
+ * @section Tab Container
+ * Container for tab components.
+ *
+ * Markup:
+ * <div class="tab-container">
+ */
 .tab-container {
   height: 100%;
   justify-content: start;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .mat-mdc-tab-group.mat-primary.mat-mdc-tab-group-stretch-tabs.ng-star-inserted {
@@ -29,6 +60,13 @@ app-root {
   max-width: 0;
 }
 
+/*
+ * @section List
+ * Styles for list elements.
+ *
+ * Markup:
+ * <div class="list">
+ */
 .list {
   border-radius: 8px;
   margin: 5px;
@@ -37,56 +75,18 @@ app-root {
   vertical-align: top;
   white-space: normal;
 }
-
 .list.ng-star-inserted {
   width: 23%;
   height: 10%;
 }
-.card-details {
-  display: none;
-  font-size: 70%;
-}
-.card:hover .card-details {
-  display: block;
-}
 
-.card:hover .suspensive {
-  display: none;
-}
-
-p {
-  border-radius: 3px;
-  padding: 5%;
-}
-
-.horas {
-  background-color: #edc578;
-}
-
-.fechas {
-  background-color: #86c285;
-}
-
-.list-title {
-  font-size: 16px;
-  padding: 10px;
-  padding-left: 30px;
-  margin-bottom: -10px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.scrollable-list {
-  max-height: 400px; 
-  width: 100%; 
-  overflow-y: auto; 
-  margin: 0 auto; 
-}
-.sortable-cards {
-  min-height: 380px;
-  display: block;
-}
-
+/*
+ * @section Card
+ * Styles for card elements.
+ *
+ * Markup:
+ * <div class="card">
+ */
 .card {
   position: relative;
   background-color: white;
@@ -96,15 +96,101 @@ p {
   margin: 10px auto;
   cursor: pointer;
 }
+.card-details {
+  display: none;
+  font-size: 70%;
+}
+.card:hover .card-details {
+  display: block;
+}
+.card:hover .suspensive {
+  display: none;
+}
 
+/*
+ * @section Paragraph
+ * Styles for paragraph elements.
+ *
+ * Markup:
+ * <p>
+ */
+p {
+  border-radius: 3px;
+  padding: 5%;
+}
+
+/*
+ * @section Date and Time
+ * Styles for date and time elements.
+ *
+ * Markup:
+ * <div class="horas">
+ * <div class="fechas">
+ */
+.horas {
+  background-color: #edc578;
+}
+.fechas {
+  background-color: #86c285;
+}
+
+/*
+ * @section List Title
+ * Styles for list titles.
+ *
+ * Markup:
+ * <div class="list-title">
+ */
+.list-title {
+  font-size: 16px;
+  padding: 10px;
+  padding-left: 30px;
+  margin-bottom: -10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/*
+ * @section Scrollable List
+ * Styles for scrollable list containers.
+ *
+ * Markup:
+ * <div class="scrollable-list">
+ */
+.scrollable-list {
+  max-height: 400px;
+  width: 100%;
+  overflow-y: auto;
+  margin: 0 auto;
+}
+
+/*
+ * @section Sortable Cards
+ * Styles for sortable card containers.
+ *
+ * Markup:
+ * <div class="sortable-cards">
+ */
+.sortable-cards {
+  min-height: 380px;
+  display: block;
+}
+
+/*
+ * @section Card Components
+ * Styles for card components.
+ *
+ * Markup:
+ * <div class="card-subject">
+ * <div class="card-assignee">
+ * <div class="card-priority">
+ */
 .card-subject {
   padding-bottom: 10px;
 }
-
 .card-assignee {
   opacity: 0.6;
 }
-
 .card-priority {
   position: absolute;
   top: 10px;
@@ -114,27 +200,37 @@ p {
   border-radius: 2px;
   background: #86c285;
 }
-
 .priority-0 {
   background: #ef7d59;
 }
-
 .priority-1 {
   background: #edc578;
 }
-
 .priority-2 {
   background: #adadad;
 }
-
 .priority-3 {
   background: #86c285;
 }
 
+/*
+ * @section DX Sortable
+ * Styles for sortable elements.
+ *
+ * Markup:
+ * <div class="dx-sortable">
+ */
 ::ng-deep .dx-sortable {
   display: block;
 }
 
+/*
+ * @section Example Container
+ * Styles for example containers.
+ *
+ * Markup:
+ * <div class="example-container">
+ */
 .example-container {
   min-height: 500px;
 }
@@ -144,6 +240,15 @@ p {
   width: auto;
   height: auto;
 }
+
+/*
+ * @section Sidenav
+ * Styles for sidenav containers.
+ *
+ * Markup:
+ * <div class="example-sidenav-content">
+ * <div class="example-sidenav">
+ */
 .example-sidenav-content {
   display: flex;
   height: 100%;
@@ -153,9 +258,25 @@ p {
 .example-sidenav {
   user-select: none;
 }
+
+/*
+ * @section Full Width
+ * Styles for full-width elements.
+ *
+ * Markup:
+ * <div class="full-width">
+ */
 .full-width {
   width: 100%;
 }
+
+/*
+ * @section Menu Button
+ * Styles for menu buttons.
+ *
+ * Markup:
+ * <button class="menu-button">
+ */
 .menu-button {
   transition: 300ms ease-in-out;
   transform: rotate(0deg);
@@ -163,15 +284,14 @@ p {
 .menu-button.rotated {
   transform: rotate(180deg);
 }
-
-$md-xsmall: 768px;
-
-.tab-container {
-  position: relative;
-  display: flex;
-  align-items: center;
+.menu-button {
+  margin-left: 5px;
 }
 
+/*
+ * @section Tab Header Pagination
+ * Styles for tab header pagination.
+ */
 .mat-tab-header-pagination.mat-tab-header-pagination-disabled {
   display: none !important;
 }
@@ -180,39 +300,43 @@ $md-xsmall: 768px;
   display: flex;
   width: 100%;
 }
-
 ::ng-deep .mat-tab-group.mat-stretch-tabs .mat-tab-label {
-  flex: 1; 
+  flex: 1;
   text-align: center;
-  max-width: none; 
+  max-width: none;
 }
 
-/*   mat-tab-group {
-      flex-grow: 1;
-      padding:2%;
-      padding-top: 0;;
-      overflow: hidden;
-  
-      .mat-tab-label-container {
-        scroll-behavior: smooth;
-      }
-    }
-*/
-
-
-.mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label.mat-mdc-tab-link:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label{
-  color:#b3a98b;
+/*
+ * @section Date Range Input Separator
+ * Styles for date range input separator.
+ */
+.mat-date-range-input-separator {
+  max-width: 5% !important;
 }
 
+/*
+ * @section Drawer Container
+ * Styles for drawer container.
+ */
 .mat-drawer-container {
   color: #231d1d;
 }
 
-
-
-:root{
-  --bs-purple :#b3a98b !important;
+/*
+ * @section Custom Properties
+ * Custom properties defined for the application.
+ */
+:root {
+  --bs-purple: #b3a98b !important;
 }
+
+/*
+ * @section Submenu
+ * Styles for submenu elements.
+ *
+ * Markup:
+ * <div class="submenu">
+ */
 .submenu {
   overflow-y: hidden;
   transition: transform 300ms ease;
@@ -223,86 +347,22 @@ $md-xsmall: 768px;
 .submenu.expanded {
   transform: scaleY(1);
 }
-
-app-tab {
-  height: 100%;
-}
-
-body {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  font-size: 100% !important;
-  margin: 0;
-}
-
-.mat-ink-bar {
-  visibility: hidden !important;
-}
-
-.cdk-drag.drag-box {
-  color: black;
-}
-
-.mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline,
-.mat-mdc-tab-link:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline {
-  border-color: #ffc107;
-}
-
-
-
-.menu-button {
-  margin-left: 5px;
-}
-.truncated-text {
-  max-width: 1px;
-  text-overflow: elipses;
-  word-wrap: no-wrap;
-  white-space: nowrap;
-}
-
-.mat-drawer-inner-container {
-  display: flex;
-  flex-direction: column !important;
-  justify-content: space-between !important  ;
-}
-
-.mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
-  display: flex;
-  justify-content: space-between;
-}
-
-.mat-mdc-list-item-unscoped-content .mdc-list-item__primary-text {
-  display: flex;
-  flex-direction: column;
-  margin-top: 5%;
-  justify-content: center;
-}
-
-.icons {
-  display: flex;
-  justify-content: space-between;
-  margin-right:2%;
-  margin-left: 5vw;
-}
-
 .submenu {
   display: none;
   padding: 0;
   flex-direction: column;
   justify-content: center;
 }
-
-.mdc-list-item__content.mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
-  display: flex !important;
-  min-width: 100%;
-  justify-content: space-around !important;
-}
-
 .submenu.expanded {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
+/*
+ * @section Tab Label Content
+ * Styles for tab label content.
+ */
 .mat-mdc-tab-label-content {
   display: flex !important;
   justify-content: space-between !important;
@@ -310,19 +370,20 @@ body {
   height: 40% !important;
 }
 
-.mat-mdc-nav-list {
+/*
+ * @section MDC List Item Content
+ * Styles for MDC list item content.
+ */
+.mdc-list-item__content.mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
   display: flex !important;
-  flex-direction: column;
+  min-width: 100%;
+  justify-content: space-around !important;
 }
 
-.mat-mdc-list-item.mdc-list-item.parent.mat-mdc-list-item-interactive.mat-mdc-list-item-single-line.mdc-list-item--with-one-line {
-  display: flex;
-}
-
-.btn {
-  --bs-btn-font-size: 100%;
-}
-
+/*
+ * @section Tab Labels
+ * Styles for tab labels.
+ */
 .mat-mdc-tab-labels {
   height: 80% !important;
   width: 100% !important;
@@ -347,88 +408,215 @@ body {
   padding-left: 0;
   padding-right: 0;
 }
-
-.mdc-tab__text-label{
-  width:100%;
-  display:flex !important;
+.mdc-tab__text-label {
+  width: 100%;
+  display: flex !important;
   justify-content: space-between !important;
 }
-
-.mdc-tab__ripple{
-  width:0;
+.mdc-tab__ripple {
+  width: 0;
 }
 
-span{
-  width:100%
-}
-
-div {
-  text-overflow: ellipsis !important;
-}
-
+/*
+ * @section Mat Icon
+ * Styles for material icons.
+ */
 .mat-icon:hover {
   background-color: white;
   border-radius: 10px !important;
 }
 
+/*
+ * @section List Item
+ * Styles for list items.
+ */
 .mat-list-base .mat-list-item {
   font-size: 80% !important;
 }
 
+/*
+ * @section Version Info
+ * Styles for version information.
+ *
+ * Markup:
+ * <div class="version-info">
+ */
 .version-info {
   font-size: 4pt;
   float: right;
 }
-.mat-tab-list {
-  height: 100%;
-}
 
-.mat-tab-label-container,
-.mat-tab-header {
-  height: 100%;
-  align-items: center;
+/*
+ * @section Tab Group
+ * Styles for tab groups.
+ */
+.mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: aqua;
 }
-
-.mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs>.mat-mdc-tab-header .mat-mdc-tab {
+.mat-tab-group {
+  max-width: 0;
+  width: 100%;
+}
+.mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs > .mat-mdc-tab-header .mat-mdc-tab {
   background-color: whitesmoke;
   align-self: end;
   border-radius: 10px 10px 0 0 !important;
   min-width: 100% !important;
-  height:50%!important;
+  height: 50% !important;
 }
-
-.mat-mdc-tab-group{
+.mat-mdc-tab-group {
   width: 100%;
   height: 100%;
 }
 
+/*
+ * @section Sidenav Content
+ * Styles for sidenav content.
+ */
+.example-sidenav-content {
+  background-color: #424242;
+}
+#toggle {
+  color: white;
+  display: flex;
+  align-self: flex-start;
+  margin-top: 5vh;
+  border: 0;
+  background-color: transparent;
+}
+
+/*
+ * @section Special Date
+ * Styles for special date elements.
+ *
+ * Markup:
+ * <div class="special-date">
+ */
+.special-date {
+  background-color: red;
+}
+
+/*
+ * @section Graph
+ * Styles for graph elements.
+ *
+ * Markup:
+ * <div class="graf">
+ */
+.graf {
+  display: none;
+}
+.fechas:hover .graf {
+  display: flex;
+}
+
+/*
+ * @section Miscellaneous
+ * Other styles that do not fit into specific sections.
+ */
+.mat-ink-bar {
+  visibility: hidden !important;
+}
+.cdk-drag.drag-box {
+  color: black;
+}
+.mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline,
+.mat-mdc-tab-link:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline {
+  border-color: #ffc107;
+}
+.mat-drawer-inner-container {
+  display: flex;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+.mat-mdc-list-item-unscoped-content .mdc-list-item__primary-text {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  justify-content: center;
+}
+.icons {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 2%;
+}
+.mat-mdc-nav-list {
+  display: flex !important;
+  flex-direction: column;
+}
+.mat-mdc-list-item.mdc-list-item.parent.mat-mdc-list-item-interactive.mat-mdc-list-item-single-line.mdc-list-item--with-one-line {
+  display: flex;
+}
+.btn {
+  --bs-btn-font-size: 100%;
+}
 .mdc-tab__content {
- margin-top:5%;
+  margin-top: 5%;
 }
-
-.dx-scrollable-content{
-  width:100%;
+.dx-scrollable-content {
+  width: 100%;
 }
-
-.mat-mdc-form-field{
-  width:100%;
+.mat-mdc-form-field {
+  width: 100%;
 }
-
-.cdk-drop-list{
-    overflow: hidden; 
-    text-overflow: ellipsis !important; 
-  }
-
-
-.mat-date-range-input-separator{
-  max-width: 5% !important;
+.cdk-drop-list {
+  overflow: hidden;
+  text-overflow: ellipsis !important;
 }
-
-
-.mat-mdc-tab-header{
-  background-color: whitesmoke;
+.mat-tab-header {
+  height: 100%;
+  align-items: center;
+  padding-top: 2vh;
+  height: 8vh;
+  border-bottom: 0;
+  overflow: visible !important;
 }
-.mat-drawer-side{
+.mat-mdc-tab-body-wrapper {
+  min-height: 100% !important;
+  padding: 4%;
+  background-color: white;
+  border-radius: 5px 5px 0 0 !important;
+}
+.mat-mdc-tab-body {
+  min-height: 100%;
+}
+.mat-tab-label:hover {
+  background-color: rgba(168, 199, 243, 255) !important;
+  border-radius: 10px 10px 10px 10px;
+  border-bottom: 5px rgba(211, 227, 253, 255);
+}
+.mat-elevation-z4 {
+  box-shadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0),
+    0 4px 5px 0 rgba(0, 0, 0, 0);
+}
+.mat-drawer-content {
+  overflow: visible !important;
+}
+.mat-tab-label:focus {
+  background-color: light !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+.mdc-tab--active {
+  background-color: white !important;
+  border-radius: 10px 10px 0 0 !important;
+  opacity: 1;
+}
+.bg-body-inverted {
+  background-color: var(--bs-body-color) !important;
+}
+.btn-ligth-inverted:hover {
+  background-color: white;
+}
+.mat-tab-header {
+  height: 80% !important;
+  padding-top: 0 !important;
+}
+.mat-mdc-tab-labels {
+  padding-left: 3%;
+  border-radius: 0 0 0 0 !important;
+}
+.mat-drawer-side {
   border-right: solid 0px white;
 }
 .mat-mdc-tab-labels,
@@ -439,99 +627,6 @@ div {
   padding-top: 2%;
   background-color: whitesmoke;
 }
-
 .tab-container {
-  background-color:#424242;
-}
-
-.mat-mdc-tab-body-wrapper {
-  min-height: 100% !important;
-  padding: 4%;
-  background-color: white;
-  border-radius: 5px 5px 0 0 !important;
-}
-.mat-mdc-tab-body {
-  min-height: 100%;
-}
-
-.mat-tab-header {
-  height: 80% !important;
-  padding-top: 0 !important;
-}
-.mat-tab-label:hover {
-  background-color: rgba(168, 199, 243, 255) !important;
-  border-radius: 10px 10px 10px 10px;
-  border-bottom: 5px rgba(211, 227, 253, 255);
-}
-
-.mat-elevation-z4 {
-  box-shadow:
-    0 2px 4px -1px rgba(0, 0, 0, 0),
-    0 4px 5px 0 rgba(0, 0, 0, 0);
-}
-
-.mat-drawer-content {
-  overflow: visible !important;
-}
-
-.mat-tab-label:focus {
-  background-color: ligh !important;
-  border-radius: 10px 10px 0 0 !important;
-}
-
-.mdc-tab--active {
-  background-color: white !important;
-  border-radius: 10px 10px 0 0 !important;
-  opacity: 1;
-}
-
-.bg-body-inverted {
-  background-color: var(--bs-body-color) !important;
-}
-.btn-ligth-inverted :hover {
-  background-color: white;
-}
-
-.mat-tab-header {
-  padding-top: 2vh;
-  height: 8vh;
-  border-bottom: 0;
-  overflow: visible !important;
-}
-
-.graf {
-  display: none;
-}
-
-.fechas :hover {
-  .graf {
-    display: flex;
-  }
-}
-
-.mat-tab-group.mat-primary .mat-ink-bar {
-  background-color: aqua;
-}
-
-.mat-tab-group {
-  max-width: 0;
-  width: 100%;
-}
-
-.mat-mdc-tab-labels {
-  padding-left: 3%;
-  border-radius: 0 0 0 0 !important;
-}
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
-
-.special-date {
-  background-color: red;
+  background-color: #424242;
 }
