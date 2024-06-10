@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnChanges, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TabService } from '../tab-service.service';
 import { CdkDragDrop, moveItemInArray, CdkDragSortEvent } from '@angular/cdk/drag-drop';
@@ -15,27 +15,29 @@ interface Tab {
   templateUrl: './tab.component.html',
   styleUrls: ['./tab.component.scss'],
 })
-export class TabComponent implements OnChanges {
-  isKanbanVisible: boolean = false;
-  isProovedorVisible: boolean = false;
-  data: any;
-  id: number | any;
+export class TabComponent  {
+
+
+  /* variable para crear un evento que haga click en la tab al crearla */
   exe = false;
+
+
+  /*variables gestión de tabs */
   tabs: any = [];
+  id: number | any;
+
   selected = new FormControl(0);
   selectedTab: number | null = null;
-  selectAfterAdding: HTMLInputElement | undefined;
   private selection = new SelectionModel();
-  showWelcomeMessage = true;
+
+
+ /* array para restaurar */ 
   restaurar: any[] = [];
-  @ViewChildren('tabContent', { read: ElementRef }) tabContents!: QueryList<ElementRef>;
+
 
   constructor(public tabService: TabService) {
     this.tabService.getNewTabObservable().subscribe((data) => {
       this.addTab(data);
-    });
-    this.tabService.showWelcomeMessage$.subscribe((showWelcome) => {
-      this.showWelcomeMessage = showWelcome;
     });
     this.tabService.getStates().subscribe((restore) => {
       this.restaurar.push(restore);
@@ -45,8 +47,7 @@ export class TabComponent implements OnChanges {
     }
   }
 
-  ngOnChanges(): void {}
-
+ /*Selección de tabs para estilo y renderizado de contenido */
   select(tab: any) {
     this.selection.select(this.tabs[0]);
 
@@ -60,10 +61,12 @@ export class TabComponent implements OnChanges {
     return this.selection.isSelected(tab);
   }
 
+
+ 
+  /*Administración de tabs */
   addTab(data: { label: string; content: any }): void {
     this.id = data.content;
     this.tabs.push(data);
-    this.isKanbanVisible = true;
     this.exe = false;
   }
 
@@ -96,6 +99,9 @@ export class TabComponent implements OnChanges {
     return connections;
   }
 
+
+  /*Organización de tabs, todavía falla al reordenar las tabs */
+
   dropped(event: CdkDragDrop<any>, t: MatTabGroup): void {
     const arr = t._tabs.toArray();
     moveItemInArray(arr, event.previousIndex, event.currentIndex);
@@ -103,6 +109,7 @@ export class TabComponent implements OnChanges {
   }
 
   drop(event: CdkDragDrop<string[]>): void {
+    /*
     const previousIndex = parseInt(event.previousContainer.id.replace('tab-', ''), 10);
     const currentIndex = parseInt(event.container.id.replace('tab-', ''), 10);
     if (
@@ -115,6 +122,7 @@ export class TabComponent implements OnChanges {
       this.selected.setValue(currentIndex);
       moveItemInArray(this.tabs, previousIndex, currentIndex);
     }
+      */
   }
 
   sort(event: CdkDragSortEvent<string[]>): void {

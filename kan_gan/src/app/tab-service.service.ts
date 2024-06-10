@@ -33,7 +33,6 @@ export class TabService {
   setMenuState(menu: string, data: any) {
     localStorage.setItem(menu, JSON.stringify(data));
     let tab = { menu, data };
-    console.log(tab);
     this.history.next(tab);
   }
 

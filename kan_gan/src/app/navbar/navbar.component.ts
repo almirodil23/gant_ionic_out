@@ -11,13 +11,13 @@ import { KanbanService } from '../kanban.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
+  id=['Formulario','Gant','Kanban']
   nombres: any = [];
   tabs = [];
   selected = new FormControl(0);
   selectedTab: number | null = null;
   selectAfterAdding: HTMLInputElement | undefined;
-  showWelcomeMessage = true;
-
+ 
   @ViewChild('sidenav') sidenav!: MatSidenavModule;
   isExpanded = true;
   isExpanded1 = true;
@@ -32,6 +32,7 @@ export class NavbarComponent {
   showKanbanSubmenu: boolean = false;
   showRestaurarSubmenu: boolean = false;
 
+
   restaurar: any[] = [];
 
   constructor(
@@ -40,78 +41,59 @@ export class NavbarComponent {
     private kanban: KanbanService,
   ) {
     this.nombres = this.kanban.getNames();
-    console.log(this.nombres);
 
     this.tabService.getStates().subscribe((restore) => {
       this.restaurar.push(restore);
-      console.log(this.restaurar);
     });
   }
 
-  openForm() {
-    this.tabService.welcome();
-    this.tabService.openNewTab({ label: 'Formulario', content: 'testings' });
-    setTimeout(() => {
-      this.router.navigate(['form']);
-    }, 100);
-  }
+/*Funcion de apertura de pestañas con parametros si es necesario. Hay tres componentes distintos */
 
-  openNewTabWithData(i: number): void {
-    this.tabService.welcome();
-    let name = this.nombres[i];
-    if (i == -1) {
-      name = 'General';
+  openTab(label:string,i?:number){
+    if(label==='Formulario'){
+      this.tabService.openNewTab({ label: 'Formulario', content: 'nada a declarar' });
+      setTimeout(() => {
+        this.router.navigate(['form']);
+      }, 100);
     }
-    const data = { label: name, content: i };
-    this.tabService.openNewTab(data);
-    setTimeout(() => {
-      this.router.navigate(['kanban', i]);
-    }, 100);
-  }
 
-  openNewTabWithDataGant(): void {
-    this.tabService.welcome();
-    const data = { label: 'Gant', content: 'Hola' };
-    this.tabService.openNewTab(data);
-    setTimeout(() => {
-      this.router.navigate(['gant']);
-    }, 150);
-  }
+    if(label==='Gant'){
+      const data = { label: 'Gant', content: 'nada a declarar' };
+      this.tabService.openNewTab(data);
+      setTimeout(() => {
+        /*pdte corregir ya que si la ruta actual ya es /gant y se navega de nuevo a dicha ruta, el componente no se renderiza */
+        this.router.navigate(['']);
+        this.router.navigate(['/gant']);
+      }, 150);
+    }
 
-  mouseenter() {
-    if (!this.isExpanded) {
-      this.isShowing = true;
-    }
-    if (!this.isExpanded1) {
-      this.isShowing1 = true;
-    }
-    if (!this.isExpanded2) {
-      this.isShowing2 = true;
-    }
+    if(label==='Kanban'){
+      if (i !== undefined && i >= -2 && i < this.nombres.length) {
+          let name = this.nombres[i];
+          if (i == -1) {
+            name = 'General'; }
+          const data = { label: name, content: i };
+          this.tabService.openNewTab(data);
+          setTimeout(() => {
+              this.router.navigate(['kanban', i]);
+                         }, 100);
+        }
   }
+}
+
+
+  /*Funcion para restaurar pestañas cerradas, no se incluye el contenido ya que debe ser específico de cada componente */
 
   restore(i: number) {
     let date = this.restaurar[i];
-    console.log(date)
     if (date.menu === 'Gant') {
-      this.openNewTabWithDataGant();
+      this.openTab('Gant');
     } else if (date.menu === 'Formulario') {
-      this.openForm();
+      this.openTab('Formulario');
     } else {
-      this.openNewTabWithData(date.data.content);
+      this.openTab('Kanban',date.data.content);
     }
     this.restaurar.splice(i, 1);
   }
 
-  mouseleave() {
-    if (!this.isExpanded1) {
-      this.isShowing1 = false;
-    }
-    if (!this.isExpanded2) {
-      this.isShowing2 = false;
-    }
-    if (!this.isExpanded) {
-      this.isShowing = false;
-    }
-  }
 }

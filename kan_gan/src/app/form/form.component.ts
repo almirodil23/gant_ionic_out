@@ -35,7 +35,6 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   cierre() {
-    console.log(this.userForm.value);
     if (!this.completado) {
       this.tabs.setMenuState('Formulario', this.userForm.value);
     } else {

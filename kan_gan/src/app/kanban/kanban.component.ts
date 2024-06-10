@@ -1,8 +1,7 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DxSortableTypes } from 'devextreme-angular/ui/sortable';
 import { KanbanService } from '../kanban.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { map, switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { TabService } from '../tab-service.service';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -14,7 +13,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class KanbanComponent implements OnInit {
   i: number = 0;
-  url: any;
   lists: any[][] = [];
   tasks: any[][] = [];
   showDetails: boolean = false;
@@ -26,11 +24,14 @@ export class KanbanComponent implements OnInit {
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
   });
+
+
   constructor(
     private service: KanbanService,
     private route: ActivatedRoute,
-    private tab: TabService,
   ) {}
+
+  
 
   ngOnInit(): void {
     this.route.params.subscribe((data) => {
@@ -41,19 +42,13 @@ export class KanbanComponent implements OnInit {
     }, 200);
   }
 
-  dateClass() {
-    return (date: Date): MatCalendarCellCssClasses => {
-      if (date.getDate() === 1) {
-        return 'special-date';
-      } else {
-        return 'container';
-      }
-    };
-  }
 
+/*Nombre trabajadores */
   getNombres() {
     this.nombres = this.service.getNames();
   }
+
+/*Seleccionar contenido a mostrar en el kanban */  
   selectProyecto(i: number) {
     let taskis: any;
     if (i == -1) {
@@ -71,6 +66,17 @@ export class KanbanComponent implements OnInit {
     }
   }
 
+/* Función para cambiar estilo en las fechas que están incluidas en plazo de tarea */  
+  dateClass() {
+    return (date: Date): MatCalendarCellCssClasses => {
+      if (date.getDate() === 1) {
+        return 'special-date';
+      } else {
+        return 'container';
+      }
+    };
+  }
+
   daySelected(inicio: Date, fin: Date, calendar: any) {
     this.selectedDates = [];
     var loop = new Date(inicio);
@@ -81,6 +87,9 @@ export class KanbanComponent implements OnInit {
   getDateOnly(date: Date): string {
     return new Date(date).toISOString().split('T')[0];
   }
+
+
+  /*Modificar el estado de una tarea arrastrandola */
 
   onListReorder(e: DxSortableTypes.ReorderEvent) {
     const list = this.lists.splice(e.fromIndex, 1)[0];
@@ -101,10 +110,11 @@ export class KanbanComponent implements OnInit {
     movedItem.estado = this.lists.findIndex((list: any[]) => list === e.toData);
   }
 
+/* Guardar estado modificado de tareas, todavía no hay indicación de como se exporta */  
+
   salvado(i: number) {
     let exportData = this.lists;
     this.service.saveTasks(exportData, i);
   }
 
-  fechas() {}
 }
