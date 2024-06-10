@@ -9,7 +9,7 @@
     <mat-nav-list>
       <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent" style="padding: 0; min-height: 12vh">
         <span class="full-width" style="display: flex; justify-content: space-around" *ngIf="isExpanded || isShowing"
-          >Menu <mat-icon mat-list-icon>home</mat-icon></span
+          > <mat-icon mat-list-icon>home</mat-icon></span
         >
         <div class="icons">
           <mat-icon class="menu-button" [ngClass]="{ rotated: showSubmenu }" *ngIf="isExpanded || isShowing"
