@@ -1,0 +1,750 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>kan-gan documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">kan-gan documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  FormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/form/form.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-form</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./form.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./form.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#completado" >completado</a>
+                            </li>
+                            <li>
+                                <a href="#userForm" >userForm</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cierre" >cierre</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(fb: FormBuilder, tabs: <a href="../injectables/TabService.html" target="_self">TabService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/form/form.component.ts:13</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                    <code>FormBuilder</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>tabs</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TabService.html" target="_self" >TabService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cierre"></a>
+                    <span class="name">
+                        <span ><b>cierre</b></span>
+                        <a href="#cierre"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cierre()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/app/form/form.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">src/app/form/form.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="20"
+                                    class="link-to-prism">src/app/form/form.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">src/app/form/form.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="completado"></a>
+                    <span class="name">
+                        <span ><b>completado</b></span>
+                        <a href="#completado"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/form/form.component.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userForm"></a>
+                    <span class="name">
+                        <span ><b>userForm</b></span>
+                        <a href="#userForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FormGroup</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/form/form.component.ts:12</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnChanges, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+import { TabService } from &#x27;../tab-service.service&#x27;;
+
+@Component({
+  selector: &#x27;app-form&#x27;,
+  templateUrl: &#x27;./form.component.html&#x27;,
+  styleUrls: [&#x27;./form.component.scss&#x27;],
+})
+export class FormComponent implements OnInit, OnDestroy {
+  userForm!: FormGroup;
+  completado &#x3D; false;
+
+  constructor(
+    private fb: FormBuilder,
+    private tabs: TabService,
+  ) {}
+
+  ngOnInit(): void {
+    this.userForm &#x3D; this.fb.group({
+      name: [&#x27;&#x27;, [Validators.required, Validators.minLength(3)]],
+      email: [&#x27;&#x27;, [Validators.required, Validators.email]],
+      password: [&#x27;&#x27;, [Validators.required, Validators.minLength(6)]],
+    });
+
+    const savedData &#x3D; this.tabs.getMenuState(&#x27;Formulario&#x27;);
+    if (typeof savedData &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp; savedData !&#x3D;&#x3D; null) {
+      this.userForm.patchValue(savedData);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.cierre();
+  }
+
+  cierre() {
+    if (!this.completado) {
+      this.tabs.setMenuState(&#x27;Formulario&#x27;, this.userForm.value);
+    } else {
+      this.userForm.patchValue({
+        name: [&#x27;&#x27;],
+        email: [&#x27;&#x27;],
+        password: [&#x27;&#x27;],
+      });
+      this.tabs.setMenuState(&#x27;Formulario&#x27;, this.userForm.value);
+    }
+  }
+
+  onSubmit(): void {
+    if (this.userForm.valid) {
+      this.completado &#x3D; true;
+    } else {
+      console.log(&#x27;Form not valid&#x27;);
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;form [formGroup]&#x3D;&quot;userForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; *ngIf&#x3D;&quot;!completado&quot; id&#x3D;&quot;cualquiera&quot;&gt;
+  &lt;div&gt;
+    &lt;label for&#x3D;&quot;name&quot;&gt;Name:&lt;/label&gt;
+    &lt;input id&#x3D;&quot;name&quot; formControlName&#x3D;&quot;name&quot; /&gt;
+    &lt;div *ngIf&#x3D;&quot;userForm.get(&#x27;name&#x27;)?.invalid &amp;&amp; userForm.get(&#x27;name&#x27;)?.touched&quot;&gt;
+      &lt;small *ngIf&#x3D;&quot;userForm.get(&#x27;name&#x27;)?.errors?.[&#x27;required&#x27;]&quot;&gt;Name is required.&lt;/small&gt;
+      &lt;small *ngIf&#x3D;&quot;userForm.get(&#x27;name&#x27;)?.errors?.[&#x27;minlength&#x27;]&quot;&gt;Name must be at least 3 characters long.&lt;/small&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+    &lt;label for&#x3D;&quot;email&quot;&gt;Email:&lt;/label&gt;
+    &lt;input id&#x3D;&quot;email&quot; formControlName&#x3D;&quot;email&quot; /&gt;
+    &lt;div *ngIf&#x3D;&quot;userForm.get(&#x27;email&#x27;)?.invalid &amp;&amp; userForm.get(&#x27;email&#x27;)?.touched&quot;&gt;
+      &lt;small *ngIf&#x3D;&quot;userForm.get(&#x27;email&#x27;)?.errors?.[&#x27;required&#x27;]&quot;&gt;Email is required.&lt;/small&gt;
+      &lt;small *ngIf&#x3D;&quot;userForm.get(&#x27;email&#x27;)?.errors?.[&#x27;email&#x27;]&quot;&gt;Invalid email address.&lt;/small&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+    &lt;label for&#x3D;&quot;password&quot;&gt;Password:&lt;/label&gt;
+    &lt;input type&#x3D;&quot;password&quot; id&#x3D;&quot;password&quot; formControlName&#x3D;&quot;password&quot; /&gt;
+    &lt;div *ngIf&#x3D;&quot;userForm.get(&#x27;password&#x27;)?.invalid &amp;&amp; userForm.get(&#x27;password&#x27;)?.touched&quot;&gt;
+      &lt;small *ngIf&#x3D;&quot;userForm.get(&#x27;password&#x27;)?.errors?.[&#x27;required&#x27;]&quot;&gt;Password is required.&lt;/small&gt;
+      &lt;small *ngIf&#x3D;&quot;userForm.get(&#x27;password&#x27;)?.errors?.[&#x27;minlength&#x27;]&quot;
+        &gt;Password must be at least 6 characters long.&lt;/small
+      &gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;button type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;userForm.invalid&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+&lt;div *ngIf&#x3D;&quot;completado&quot;&gt;Formulario enviado correctamente. Puedes cerrar esta pestaña!&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./form.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">/* src/app/user-form/user-form.component.css */
+div {
+    margin-bottom: 10px;
+  }
+  
+  small {
+    color: red;
+  }
+  </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><form [formGroup]="userForm" (ngSubmit)="onSubmit()" *ngIf="!completado" id="cualquiera">  <div>    <label for="name">Name:</label>    <input id="name" formControlName="name" />    <div *ngIf="userForm.get(\'name\')?.invalid && userForm.get(\'name\')?.touched">      <small *ngIf="userForm.get(\'name\')?.errors?.[\'required\']">Name is required.</small>      <small *ngIf="userForm.get(\'name\')?.errors?.[\'minlength\']">Name must be at least 3 characters long.</small>    </div>  </div>  <div>    <label for="email">Email:</label>    <input id="email" formControlName="email" />    <div *ngIf="userForm.get(\'email\')?.invalid && userForm.get(\'email\')?.touched">      <small *ngIf="userForm.get(\'email\')?.errors?.[\'required\']">Email is required.</small>      <small *ngIf="userForm.get(\'email\')?.errors?.[\'email\']">Invalid email address.</small>    </div>  </div>  <div>    <label for="password">Password:</label>    <input type="password" id="password" formControlName="password" />    <div *ngIf="userForm.get(\'password\')?.invalid && userForm.get(\'password\')?.touched">      <small *ngIf="userForm.get(\'password\')?.errors?.[\'required\']">Password is required.</small>      <small *ngIf="userForm.get(\'password\')?.errors?.[\'minlength\']"        >Password must be at least 6 characters long.</small      >    </div>  </div>  <button type="submit" [disabled]="userForm.invalid">Submit</button></form><div *ngIf="completado">Formulario enviado correctamente. Puedes cerrar esta pestaña!</div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'FormComponent', 'selector': 'app-form'},{'name': 'GanttComponent', 'selector': 'app-gantt'},{'name': 'GraficoComponent', 'selector': 'app-grafico'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'KanbanComponent', 'selector': 'app-kanban'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'TabComponent', 'selector': 'app-tab'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'FormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'FormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
