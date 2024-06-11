@@ -1,0 +1,12 @@
+<div style="color:black;">
+    <script type="text/ng-template" id="tree_item_renderer.html">
+        <span>{{ value.label }} {{ value.value }}</span>
+        <ul>
+            <li ng-repeat="child in value.children" ng-include="'tree_item_renderer.html'"></li>
+        </ul>
+    </script>
+
+    <ul>
+        <li ng-repeat="item in menuData" ng-include="'tree_item_renderer.html'"></li>
+    </ul>
+</div>

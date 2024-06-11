@@ -46,6 +46,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { FormComponent } from './form/form.component';
+import { NavbarRecursiveComponent } from './navbar-recursive/navbar-recursive.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { FormComponent } from './form/form.component';
     GanttComponent,
     GraficoComponent,
     FormComponent,
+    NavbarRecursiveComponent,
   ],
   imports: [
     BrowserModule,
