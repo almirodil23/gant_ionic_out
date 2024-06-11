@@ -4,6 +4,7 @@ import { TabService } from '../tab-service.service';
 import { CdkDragDrop, moveItemInArray, CdkDragSortEvent } from '@angular/cdk/drag-drop';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTabGroup } from '@angular/material/tabs';
+import { Router } from '@angular/router';
 
 interface Tab {
   label: string;
@@ -24,6 +25,7 @@ export class TabComponent  {
 
   /*variables gestión de tabs */
   tabs: any = [];
+  routes:any=[];
   id: number | any;
 
   selected = new FormControl(0);
@@ -35,9 +37,10 @@ export class TabComponent  {
   restaurar: any[] = [];
 
 
-  constructor(public tabService: TabService) {
+  constructor(public tabService: TabService,private router:Router) {
     this.tabService.getNewTabObservable().subscribe((data) => {
       this.addTab(data);
+      setTimeout(()=>{this.routes.push(this.router.url)},200)
     });
     this.tabService.getStates().subscribe((restore) => {
       this.restaurar.push(restore);
@@ -48,13 +51,14 @@ export class TabComponent  {
   }
 
  /*Selección de tabs para estilo y renderizado de contenido */
-  select(tab: any) {
+  select(tab: any,i:number) {
     this.selection.select(this.tabs[0]);
 
     if (!this.selection.isSelected(tab)) {
       this.selection.clear();
       this.selection.select(tab);
     }
+    this.router.navigateByUrl(this.routes[i+1])
   }
 
   isSelected(tab: any): boolean {
