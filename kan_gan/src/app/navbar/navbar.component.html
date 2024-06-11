@@ -7,7 +7,7 @@
     style="width: 20%; height: 100%"
   >
     <mat-nav-list>
-      <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent" style="padding: 0; height: 12vh">
+      <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent-no-border" style="padding: 0; height: 12vh;">
         <span class="full-width" style="display: flex; justify-content: space-around" *ngIf="isExpanded || isShowing">
           <mat-icon mat-list-icon>home</mat-icon>
           <mat-icon mat-list-icon style="margin-left:5vw;">expand_more</mat-icon>
@@ -28,7 +28,7 @@
           <span class="full-width" *ngIf="isExpanded1 || isShowing1">Gant</span>
         </mat-list-item>
 
-        <mat-list-item (click)="showKanbanSubmenu = !showKanbanSubmenu" class="parent">
+        <mat-list-item (click)="showKanbanSubmenu = !showKanbanSubmenu" class="parent-no-border" >
           <span class="full-width" *ngIf="isExpanded || isShowing">Kanban</span>
           <mat-icon class="menu-button" [ngClass]="{ rotated: showKanbanSubmenu }" *ngIf="isExpanded || isShowing">
             expand_more
@@ -45,27 +45,23 @@
         </div>
       </div>
     </mat-nav-list>
+  </mat-sidenav>
 
-    <mat-nav-list>
-      <mat-list-item (click)="showRestaurarSubmenu = !showRestaurarSubmenu" class="parent">
-        <span class="full-width" *ngIf="isExpanded || isShowing">Restaurar pestañas</span>
-        <mat-icon class="menu-button" [ngClass]="{ rotated: showRestaurarSubmenu }" *ngIf="isExpanded || isShowing">
-          expand_more
-        </mat-icon>
-      </mat-list-item>
-      <div class="submenu" [ngClass]="{ expanded: showRestaurarSubmenu }" *ngIf="isShowing || isExpanded" style="padding: 0">
+  <div class="example-sidenav-content" style="align-items: start;">
+    <div style=>
+    <button mat-button id="toggle" (click)="showRestaurarSubmenu = !showRestaurarSubmenu"><mat-icon mat-list-icon>history</mat-icon></button>
+
+      <div class="submenu" id="history" [ngClass]="{ expanded: showRestaurarSubmenu }" *ngIf="isShowing || isExpanded">
+        <div style="display: flex;justify-content: end;"><button mat-button (click)="showRestaurarSubmenu = !showRestaurarSubmenu" style="color:whitesmoke;background-color:transparent;border:0;padding:0;margin:0;"><mat-icon mat-list-icon>clear</mat-icon></button></div>
         <div style="display: flex; flex-direction: column; justify-content: end; align-items: center; margin-top: 3%">
-          <mat-list-item *ngFor="let data of restaurar; let i = index" (click)="restore(i)" style="padding-left: 6vw">
+          <mat-list-item *ngFor="let data of restaurar; let i = index" (click)="restore(i)" style="padding-left: 6vw;border-bottom: none;">
             {{ data.menu }}
           </mat-list-item>
         </div>
       </div>
-    </mat-nav-list>
-  </mat-sidenav>
-
-  <div class="example-sidenav-content">
     <button mat-button (click)="toggleSidenav()" id="toggle" *ngIf="isExpandedSide"><mat-icon mat-list-icon>navigate_before</mat-icon></button>
     <button mat-button (click)="toggleSidenav()" id="toggle" *ngIf="!isExpandedSide"><mat-icon mat-list-icon>navigate_next</mat-icon></button>
+    </div>
     <app-tab style="width: 100%"></app-tab>
   </div>
 </mat-sidenav-container>

@@ -374,6 +374,19 @@ div {
   font-size: 80% !important;
 }
 
+
+.mat-mdc-list-item, .mat-mdc-list-option {
+ width:84% !important;
+ margin-left: 16px !important;
+ margin-right: 15px !important;
+ padding-left: 0 !important;
+ padding-right: 0 !important;
+}
+
+mat-list-item{
+  border-bottom: 1px solid #e6e6e6;
+}
+
 .version-info {
   font-size: 4pt;
   float: right;
@@ -537,15 +550,31 @@ body {
 
 
 .example-sidenav-content{
-  background-color:  #424242;
+  background-color:  whitesmoke;
+
 }
 
 #toggle{
-  color:white;
+  color:black;
   display:flex;
   align-self: flex-start;
-  margin-top: 5vh;
+  margin-top: 1vh;
   border:0;
   background-color: transparent;
 }
 
+.parent-no-border{
+  border-bottom: none;
+}
+
+.expanded#history{
+  display: flex;
+  background-color: #424242;
+  color:whitesmoke;
+  border-radius: 7%;
+  margin-left:1vw;
+  padding:1%;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;position:absolute
+}
