@@ -47,6 +47,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { FormComponent } from './form/form.component';
 import { NavbarRecursiveComponent } from './navbar-recursive/navbar-recursive.component';
+import { RecursiveCoreComponent } from './recursive-core/recursive-core.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { NavbarRecursiveComponent } from './navbar-recursive/navbar-recursive.co
     GraficoComponent,
     FormComponent,
     NavbarRecursiveComponent,
+    RecursiveCoreComponent,
   ],
   imports: [
     BrowserModule,

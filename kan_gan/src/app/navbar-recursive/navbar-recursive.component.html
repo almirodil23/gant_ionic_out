@@ -1,12 +1,16 @@
-<div style="color:black;">
-    <script type="text/ng-template" id="tree_item_renderer.html">
-        <span>{{ value.label }} {{ value.value }}</span>
-        <ul>
-            <li ng-repeat="child in value.children" ng-include="'tree_item_renderer.html'"></li>
-        </ul>
-    </script>
+<div style="color:whitesmoke;" class="sidenav" *ngIf="isExpandedSide">
+    <app-recursive-core></app-recursive-core>
+  </div>
+  <div class="example-sidenav-content" style="align-items: start;">
+    <div style=>
+    <button mat-button (click)="toggleSidenav()" id="toggle" *ngIf="isExpandedSide"><mat-icon mat-list-icon>navigate_before</mat-icon></button>
+    <button mat-button (click)="toggleSidenav()" id="toggle" *ngIf="!isExpandedSide"><mat-icon mat-list-icon>navigate_next</mat-icon></button>
+    <button mat-button id="toggle" (click)="addHijo()"><mat-icon mat-list-icon>add</mat-icon></button>
+    </div>
+    <app-tab style="width: 100%"></app-tab>
+  </div>
 
-    <ul>
-        <li ng-repeat="item in menuData" ng-include="'tree_item_renderer.html'"></li>
-    </ul>
-</div>
+
+
+
+

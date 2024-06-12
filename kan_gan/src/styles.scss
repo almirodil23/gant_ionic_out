@@ -578,3 +578,50 @@ body {
   justify-content: center;
   z-index: 2;position:absolute
 }
+
+ul, #myUL {
+  list-style-type: none;
+}
+
+#myUL {
+  margin: 8%;
+  padding: 0;
+  background-color: transparent;
+  background-size: auto;
+}
+
+.caret {
+  display:flex;
+  width:fit-content;
+  cursor: pointer;
+  user-select: none; 
+}
+
+.caret::before {
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down mat-icon {
+  transform: rotate(90deg);
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.sidenav{
+  background-color: #424242 ;
+  width:100%;
+}
+
+div.caret.selected{
+  background-color: #95959563 !important;
+  border-radius: 10px 10px 10px 10px;
+  padding:1%;
+}

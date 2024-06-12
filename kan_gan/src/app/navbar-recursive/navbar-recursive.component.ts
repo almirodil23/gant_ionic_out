@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import data_tree from 'src/assets/data_tree.json';
+import { RecursiveService } from '../recursive.service';
 
 
 @Component({
@@ -10,28 +11,55 @@ import data_tree from 'src/assets/data_tree.json';
 
 
 
+
 export class NavbarRecursiveComponent implements OnInit{
 
-@Input()menuData: any;
 
 
 maxDepth=0
 keys:any
+showRestaurarSubmenu: boolean = false;
+isShowing = false;
+isExpandedSide = true;
+isExpanded = true;
+selectedItem:any;
 
 
-constructor() {
-  console.log(this.getMaxDepth(this.menuData=data_tree))
+
+
+  constructor(private recursiveService: RecursiveService) {
+    this.selectedItem = this.recursiveService.selectedItem$.subscribe(item => {
+      this.selectedItem = item;
+    })
+   }
+
+
+
+ addHijo(){
+    let text=this.selectedItem.querySelector('span').textContent
+    this.recursiveService.findData(text)
  }
 
-  toggleSubMenu(menuItem: any) {
-    if (menuItem.children) {
-      menuItem.showSubMenu = !menuItem.showSubMenu;
+
+ toggleSidenav() {
+  this.isExpandedSide = !this.isExpandedSide;
+}
+
+ toggle(event: Event) {
+  const element = event.target as HTMLElement;
+  const parentElement = element.parentElement?.parentElement;
+  if (parentElement) {
+    const nestedElement = parentElement.querySelector('.nested') as HTMLElement;
+    if (nestedElement) {
+      nestedElement.classList.toggle('active');
     }
+    element.classList.toggle('caret-down');
+    element.textContent = element.textContent === 'keyboard_arrow_right' ? 'expand_more' : 'keyboard_arrow_right';
   }
+}
+
 
   ngOnInit(): void {
-    console.log(this.menuData)
-    const keys = Object.keys(this.menuData);
 
   }
 

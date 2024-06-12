@@ -1,0 +1,14 @@
+<ul id="myUL"> 
+    <ng-container *ngFor="let data of menuData">
+      <li>
+          <div class="caret" (click)="selected($event)"> 
+                <span >{{ data.label }}</span >
+                <mat-icon mat-list-icon (click)="toggle($event)" *ngIf="data.children">keyboard_arrow_right</mat-icon>
+          </div>
+        <ul class="nested">
+          <app-recursive-core *ngIf="data.children" [menuData]="data.children"></app-recursive-core>
+        </ul>
+      </li>
+    </ng-container>
+  </ul>
+
