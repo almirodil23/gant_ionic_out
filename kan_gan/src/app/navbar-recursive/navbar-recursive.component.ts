@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import data_tree from 'src/assets/data_tree.json';
 import { RecursiveService } from '../recursive.service';
+import { waitForAsync } from '@angular/core/testing';
 
 
 @Component({
@@ -23,6 +24,8 @@ isShowing = false;
 isExpandedSide = true;
 isExpanded = true;
 selectedItem:any;
+state:number=0;
+node:any;
 
 
 
@@ -31,13 +34,53 @@ selectedItem:any;
     this.selectedItem = this.recursiveService.selectedItem$.subscribe(item => {
       this.selectedItem = item;
     })
+    this.node= this.recursiveService.selectedLabel$.subscribe(item=>{
+      this.node=item;
+      console.log(this.node)
+    })
    }
 
 
 
- addHijo(){
-    let text=this.selectedItem.querySelector('span').textContent
-    this.recursiveService.findData(text)
+ async addHijo(event:Event){
+    const input=document.createElement("input")
+    input.type = "text";
+    const parrafo=document.createElement("p")
+    parrafo.appendChild(input)
+    this.selectedItem.appendChild(parrafo)
+
+
+    const form= await new Promise(resolve =>{
+      input.addEventListener('keydown',(event)=>{if (event.key==='Enter'){resolve(event)}})
+    })
+    
+    let value=input.value
+
+    let zona=this.selectedItem.querySelector('span').textContent
+    this.recursiveService.addData(zona,value)
+    parrafo.remove()
+ }
+
+ async eliminarNodo(event:Event){
+    const form=document.getElementById('eliminar')
+    form?.classList.add('eliminarshown')
+
+    const respuesta= await new Promise(resolve =>{
+      document.addEventListener('click',(event)=>{  
+        if(event){    
+      if(this.state==1){resolve(1)}
+      if(this.state==2){resolve(2)}
+      else{
+        waitForAsync
+      }}})
+    })
+    console.log(this.state)
+    if(this.state==1){
+      let zona=this.selectedItem.querySelector('span').textContent
+      this.recursiveService.removeData(zona)
+    }
+    form?.classList.remove('eliminarshown')
+    this.state=0  
  }
 
 
@@ -45,18 +88,6 @@ selectedItem:any;
   this.isExpandedSide = !this.isExpandedSide;
 }
 
- toggle(event: Event) {
-  const element = event.target as HTMLElement;
-  const parentElement = element.parentElement?.parentElement;
-  if (parentElement) {
-    const nestedElement = parentElement.querySelector('.nested') as HTMLElement;
-    if (nestedElement) {
-      nestedElement.classList.toggle('active');
-    }
-    element.classList.toggle('caret-down');
-    element.textContent = element.textContent === 'keyboard_arrow_right' ? 'expand_more' : 'keyboard_arrow_right';
-  }
-}
 
 
   ngOnInit(): void {

@@ -5,9 +5,25 @@
     <div style=>
     <button mat-button (click)="toggleSidenav()" id="toggle" *ngIf="isExpandedSide"><mat-icon mat-list-icon>navigate_before</mat-icon></button>
     <button mat-button (click)="toggleSidenav()" id="toggle" *ngIf="!isExpandedSide"><mat-icon mat-list-icon>navigate_next</mat-icon></button>
-    <button mat-button id="toggle" (click)="addHijo()"><mat-icon mat-list-icon>add</mat-icon></button>
+    <button mat-button id="toggle" (click)="addHijo($event)"><mat-icon mat-list-icon>add</mat-icon></button>
+    <button mat-button id="toggle" (click)="eliminarNodo($event)"><mat-icon mat-list-icon>delete</mat-icon></button>
     </div>
     <app-tab style="width: 100%"></app-tab>
+    <div class="modal" tabindex="2" role="dialog" id="eliminar">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header border-0">
+            </div>
+            <div class="modal-body  border-0">
+              <p>¿Seguro que quieres eliminar {{this.node}} y todo su contenido?</p>
+            </div>
+            <div class="modal-footer">
+                <button mat-button class="btn btn-light" (click)="state=1"><mat-icon mat-list-icon>check</mat-icon></button>
+                <button mat-button class="btn btn-light"(click)="state=2"><mat-icon mat-list-icon>close</mat-icon></button>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 
 

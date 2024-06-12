@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import data_tree_ from 'src/assets/data_tree.json';
 
 
 interface arbolPadreHijo {
-  label: string;
+  label?: string;
   children?: arbolPadreHijo[];
 }
 
@@ -19,9 +19,22 @@ export class RecursiveService {
   data_tree=data_tree_
   private selectedItemSubject: BehaviorSubject<HTMLElement | null> = new BehaviorSubject<HTMLElement | null>(null);
   selectedItem$: Observable<HTMLElement | null> = this.selectedItemSubject.asObservable();
+  private label:BehaviorSubject<string|null>= new BehaviorSubject<string|null>(null)
+  selectedLabel$:Observable<string|null>=this.label.asObservable()
+
+
+
 
   setSelectedItem(element: HTMLElement) {
     const prevSelectedItem = this.selectedItemSubject.getValue();
+
+
+    const text1=element.innerText
+    let ind=0
+    if(!text1.match('\n')?.index){let ind=text1.substring(0,text1.match('\n')?.index)}else{let text}
+    let text=text1.substring(0,ind)
+    this.label.next(text)
+
     if (prevSelectedItem) {
       prevSelectedItem.classList.remove('selected');
       prevSelectedItem.classList.add('caret');
@@ -38,9 +51,21 @@ export class RecursiveService {
     return this.data_tree
   }
 
-  addData(){
-  
+  addData(zona:string,value:string){
+     let nodo=this.findData(zona)
+     if(nodo){
+     if (!nodo.children){nodo.children=[]}
+        nodo.children=[...nodo.children.concat({label:value})]}
+      console.log(this.data_tree)   
   }
+
+  removeData(zona:string){
+    let nodo=this.findData(zona)
+    if(nodo){
+         delete nodo.children;
+         delete nodo.label;
+       console.log(this.data_tree)   
+  }}
 
 
  findData (value: string,arbol?: arbolPadreHijo[]): arbolPadreHijo | null {
@@ -51,11 +76,7 @@ export class RecursiveService {
         if (nodo.children) {
             const foundInChildren = this.findData(value,nodo.children);
             if (foundInChildren) {
-              if (!foundInChildren.children){
-              foundInChildren.children=[]}
-              foundInChildren.children=[...foundInChildren.children.concat({label:'new'})]
-                console.log(foundInChildren)
-                console.log(this.data_tree)
+                this.label.next(value)
                 return foundInChildren;
             }
         }
