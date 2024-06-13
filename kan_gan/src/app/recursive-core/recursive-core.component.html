@@ -1,14 +1,27 @@
-<ul id="myUL"> 
-    <ng-container *ngFor="let data of menuData">
-      <li>
-          <div class="caret" (click)="selected($event);toggle($event)"> 
-                <span >{{ data.label }}</span >
-                <mat-icon mat-list-icon  *ngIf="data.children" >keyboard_arrow_right</mat-icon>
-          </div>
-        <ul class="nested">
-          <app-recursive-core *ngIf="data.children" [menuData]="data.children"></app-recursive-core>
-        </ul>
-      </li>
-    </ng-container>
+<ul  [id]="'myUL'"cdkDropList (cdkDropListDropped)="drop($event)">
+    <li *ngFor="let data of menuData" [attr.id]="data.label" [cdkDragData]="data" cdkDrag>
+      <div class="caret" (click)="selected($event);toggle($event)">
+        <span>{{ data.label }}</span>
+        <mat-icon mat-list-icon *ngIf="data.children">keyboard_arrow_right</mat-icon>
+      </div>
+      <ul class="nested" *ngIf="data.children && data.children.length">
+        <app-recursive-core [menuData]="data.children"></app-recursive-core>
+      </ul>
+    </li>
   </ul>
 
+  <div class="modal" tabindex="4" role="dialog" id="drag">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+        </div>
+        <div class="modal-body  border-0">
+          <p>¡Debes soltar el elemento en el titulo del contenedor!</p>
+        </div>
+        <div class="modal-footer">
+            <button mat-button class="btn btn-light" type="submit"><mat-icon mat-list-icon>close</mat-icon></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

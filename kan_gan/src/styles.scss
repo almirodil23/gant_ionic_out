@@ -598,6 +598,7 @@ ul, #myUL {
 }
 
 .caret::before {
+  display:hidden;
   color: black;
   display: inline-block;
   margin-right: 6px;
@@ -661,7 +662,40 @@ div.caret.selected{
   overflow-y: hidden;
 }
 
+.eliminar1{
+  display:none;
+  background-color: #424242 ;
+  margin-left: auto;
+  margin-right: auto;
+
+  text-align: center;
+}
+
+.modal.eliminarshown1{
+  color:black;
+  display:block;
+  z-index: 5;
+  left: 50vw;
+  top:15vh;
+  width:40vw;
+  align-content:center;
+  height:30vh;
+  position:absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center; 
+  overflow-y: hidden;
+}
+
 .modal{
   border-bottom: 0 !important;
   height:56%;
+}
+
+.highlight {
+  background-color: #95959563 !important;
+  border-radius: 10px 10px 10px 10px;
+  padding:1%;
 }

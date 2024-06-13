@@ -1,130 +1,41 @@
-[{
-    "label": "Root",
+[
+  {
+    "label": "Raíz",
     "children": [
       {
-        "label": "Node 1",
+        "label": "Alfa",
         "children": [
           {
-            "label": "Node 1.1",
+            "label": "Manzana",
             "children": [
-              {
-                "label": "Node 1.1.1",
-                "children": [
-                  {
-                    "label": "Node 1.1.1.1"
-                  },
-                  {
-                    "label": "Node 1.1.1.2"
-                  }
-                ]
-              },
-              {
-                "label": "Node 1.1.2",
-                "children": [
-                  {
-                    "label": "Node 1.1.2.1"
-                  },
-                  {
-                    "label": "Node 1.1.2.2"
-                  }
-                ]
-              }
+              { "label": "Piña" },
+              { "label": "Plátano" }
             ]
           },
           {
-            "label": "Node 1.2",
+            "label": "Naranja",
             "children": [
-              {
-                "label": "Node 1.2.1",
-                "children": [
-                  {
-                    "label": "Node 1.2.1.1"
-                  },
-                  {
-                    "label": "Node 1.2.1.2"
-                  }
-                ]
-              },
-              {
-                "label": "Node 1.2.2",
-                "children": [
-                  {
-                    "label": "Node 1.2.2.1"
-                  },
-                  {
-                    "label": "Node 1.2.2.2"
-                  }
-                ]
-              }
+              { "label": "Uva" },
+              { "label": "Cereza" }
             ]
           }
         ]
       },
       {
-        "label": "Node 2",
+        "label": "Beta",
         "children": [
           {
-            "label": "Node 2.1",
+            "label": "Limón",
             "children": [
-              {
-                "label": "Node 2.1.1",
-                "children": [
-                  {
-                    "label": "Node 2.1.1.1"
-                  },
-                  {
-                    "label": "Node 2.1.1.2",
-                    "children":[
-                      {
-                        "label":"Node 2.1.1.1.1",
-                        "children":[
-                          {
-                            "label":"Node 2.1.1.1.1.1"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "label": "Node 2.1.2",
-                "children": [
-                  {
-                    "label": "Node 2.1.2.1"
-                  },
-                  {
-                    "label": "Node 2.1.2.2"
-                  }
-                ]
-              }
+              { "label": "Lima" },
+              { "label": "Coco" }
             ]
           },
           {
-            "label": "Node 2.2",
+            "label": "Mango",
             "children": [
-              {
-                "label": "Node 2.2.1",
-                "children": [
-                  {
-                    "label": "Node 2.2.1.1"
-                  },
-                  {
-                    "label": "Node 2.2.1.2"
-                  }
-                ]
-              },
-              {
-                "label": "Node 2.2.2",
-                "children": [
-                  {
-                    "label": "Node 2.2.2.1"
-                  },
-                  {
-                    "label": "Node 2.2.2.2"
-                  }
-                ]
-              }
+              { "label": "Melocotón" },
+              { "label": "Pera" }
             ]
           }
         ]

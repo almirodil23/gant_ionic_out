@@ -1,6 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import data_tree from 'src/assets/data_tree.json';
 import { RecursiveService } from '../recursive.service';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { waitForAsync } from '@angular/core/testing';
+
+interface arbolPadreHijo {
+  label?: string;
+  children?: arbolPadreHijo[];
+}
 
 @Component({
   selector: 'app-recursive-core',
@@ -9,13 +16,14 @@ import { RecursiveService } from '../recursive.service';
 })
 export class RecursiveCoreComponent implements OnInit{
 
-  @Input()menuData!: any[];
+  @Input() menuData: arbolPadreHijo[];
   @Output() newItemEvent = new EventEmitter<HTMLElement>();
 
   
-  maxDepth=0
+  position:any;
   keys:any;
   selectedItem:any;
+  drops:number=0;
 
   
 
@@ -25,7 +33,6 @@ export class RecursiveCoreComponent implements OnInit{
     this.menuData=recursiveService.getData()
    }
   
-   addHijo(){}
   
 
    selected(e: Event) {
@@ -34,8 +41,35 @@ export class RecursiveCoreComponent implements OnInit{
   }
   
   
-
- 
+  async drop(event: CdkDragDrop<arbolPadreHijo[]>) {
+    this.drops=this.drops+1
+    console.log(this.drops)
+    /*pdte*/
+    if(this.drops==3){
+      const form=document.getElementById('drag')
+      if(form){form.classList.add('eliminarshown1') }
+  
+      const respuesta= await new Promise(resolve =>{
+        const submitHandler = (event:any) => {
+          event.preventDefault(); 
+          form?.removeEventListener('submit', submitHandler); 
+          resolve('okey'); 
+        };
+    
+        form?.addEventListener('submit', submitHandler);
+      });
+    
+      form?.classList.remove('eliminarshown1')
+      this.drops=0  
+    }
+    const element = document.elementFromPoint(event.dropPoint.x,event.dropPoint.y);
+    console.log(element)
+     if(element&&element.className==='caret-down'){
+    if(element?.textContent){let zona=element.textContent
+    this.recursiveService.move(event.item.data.label,zona)}
+    }
+    }
+  
    toggle(event: Event) {
     const element = event.target as HTMLElement;
     const parentElement = element.parentElement?.parentElement;
@@ -50,39 +84,28 @@ export class RecursiveCoreComponent implements OnInit{
       elementicon.textContent = elementicon.textContent === 'keyboard_arrow_right' ? 'expand_more' : 'keyboard_arrow_right';}
     }
   }
+
+  getConnectedDropLists(nodeList: arbolPadreHijo[]): string[] {
+    const ids: string[] = [];
   
+    function collectIds(nodes: arbolPadreHijo[], parentId: string = '') {
+      for (const node of nodes) {
+        const id = parentId ? `${parentId}-${node.label?.replace(/\s+/g, '-').toLowerCase()}` : node.label?.replace(/\s+/g, '-').toLowerCase();
+        ids.push(id||'');
+        if (node.children) {
+          collectIds(node.children, id);
+        }
+      }
+    }
+  
+    collectIds(nodeList);
+    return ids;
+  }
   
     ngOnInit(): void {
       const keys = Object.keys(this.menuData);
-  
+
     }
-  
-    hasChildren(menuItem: any): boolean {
-      return menuItem.children && menuItem.children.length > 0;
-    }
-  
-    getMaxDepth(tree: any, currentDepth: number = 0): number {
-    // Si el árbol es null o no tiene hijos, devuelve la profundidad actual
-    if (!tree || !tree.children || tree.children.length === 0) {
-      return currentDepth;
-    }
-  
-    // Inicializar la profundidad máxima como la profundidad actual
-    let maxDepth = currentDepth;
-  
-    // Iterar sobre los hijos del árbol
-    for (const child of tree.children) {
-      // Calcular la profundidad para el hijo actual
-      const childDepth = this.getMaxDepth(child, currentDepth + 1);
-  
-      // Actualizar la profundidad máxima si la profundidad del hijo es mayor
-      if (childDepth > maxDepth) {
-        maxDepth = childDepth;
-      }
-    }
-     this.maxDepth=maxDepth;
-    return maxDepth;
+
+ 
   }
-    
-  }
-  
