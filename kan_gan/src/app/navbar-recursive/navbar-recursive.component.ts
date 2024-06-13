@@ -3,6 +3,7 @@ import data_tree from 'src/assets/data_tree.json';
 import { RecursiveService } from '../recursive.service';
 import { waitForAsync } from '@angular/core/testing';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 
 
@@ -25,7 +26,7 @@ export class NavbarRecursiveComponent implements OnInit{
 
 
 
-maxDepth=0
+Form!: FormGroup;
 keys:any
 showRestaurarSubmenu: boolean = false;
 isShowing = false;
@@ -35,11 +36,13 @@ selectedItem:any;
 state:number=0;
 node:any;
 menuData: arbolPadreHijo[];
+results:any=[]
 
 
-
-
-  constructor(private recursiveService: RecursiveService) {
+      
+      constructor(private recursiveService: RecursiveService) 
+      
+      {
     this.selectedItem = this.recursiveService.selectedItem$.subscribe(item => {
       this.selectedItem = item;
     })
@@ -48,7 +51,12 @@ menuData: arbolPadreHijo[];
     })
       this.menuData=recursiveService.getData()
 
-   }
+        this.Form = new FormGroup({
+        texto: new FormControl('')
+      });
+  
+    }
+   
 
 
    drop(event: CdkDragDrop<arbolPadreHijo[]>) {
@@ -60,6 +68,13 @@ menuData: arbolPadreHijo[];
         event.currentIndex
       );
     }}
+
+
+
+    closeAlert(){
+      const form=document.getElementById('drag')
+      form?.classList.remove('eliminarshown1')
+    }
 
  async addHijo(event:Event){
     const input=document.createElement("input")
@@ -108,12 +123,42 @@ menuData: arbolPadreHijo[];
 
 
 
-  ngOnInit(): void {
-   this.buscar()
+ngOnInit(): void {
+}
+
+async buscar() {
+  this.Form.controls['texto'].setValue('');
+  const valueChangesSubscription = this.Form.controls['texto'].valueChanges.subscribe(value => {
+  const result1=this.recursiveService.findData(value);
+  var child:any=[]
+  if(result1){}
+  if(result1?.children){
+    for(let a=0;a<result1?.children?.length;a++){
+    child.push(result1.children[a].label)}}
+/*Pendiente permitir seleccionar la coincidencia y navegar hacia ella*/
+
+  const result=`${result1?.label} --> ${child}...`
+  if(result1){this.results.push(result)}else{
+    this.results=[]
   }
- buscar(){
-  const value='Cereza'
-  this.recursiveService.goTo(value)
- }
-  
+  });
+
+  const form = document.getElementById('input');
+  form?.classList.add('inputshown');
+
+  const respuesta = await new Promise<string>(resolve => {
+    const bajarTecla = (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        resolve(this.Form.controls['texto'].value);
+        document.removeEventListener('keydown', bajarTecla);
+      }
+    };
+    document.addEventListener('keydown', bajarTecla);
+  });
+
+  valueChangesSubscription.unsubscribe();
+
+  this.Form.reset();
+  form?.classList.remove('inputshown');
+}
 }

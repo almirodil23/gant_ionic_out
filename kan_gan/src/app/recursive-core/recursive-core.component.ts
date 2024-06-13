@@ -41,30 +41,18 @@ export class RecursiveCoreComponent implements OnInit{
   }
   
   
-  async drop(event: CdkDragDrop<arbolPadreHijo[]>) {
+  drop(event: CdkDragDrop<arbolPadreHijo[]>) {
     this.drops=this.drops+1
     console.log(this.drops)
     /*pdte*/
     if(this.drops==3){
       const form=document.getElementById('drag')
       if(form){form.classList.add('eliminarshown1') }
-  
-      const respuesta= await new Promise(resolve =>{
-        const submitHandler = (event:any) => {
-          event.preventDefault(); 
-          form?.removeEventListener('submit', submitHandler); 
-          resolve('okey'); 
-        };
-    
-        form?.addEventListener('submit', submitHandler);
-      });
-    
-      form?.classList.remove('eliminarshown1')
-      this.drops=0  
+      this.drops=0 
     }
     const element = document.elementFromPoint(event.dropPoint.x,event.dropPoint.y);
     console.log(element)
-     if(element&&element.className==='caret-down'){
+     if(element&&element.className==='caret-down'||element&&element.className==='spin'||element&&element.className==='spin caret-down'){
     if(element?.textContent){let zona=element.textContent
     this.recursiveService.move(event.item.data.label,zona)}
     }

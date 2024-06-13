@@ -581,6 +581,7 @@ body {
 
 ul, #myUL {
   list-style-type: none;
+  overflow:visible;
 }
 
 #myUL {
@@ -698,4 +699,27 @@ div.caret.selected{
   background-color: #95959563 !important;
   border-radius: 10px 10px 10px 10px;
   padding:1%;
+}
+
+.input{
+  display:none;
+  background-color: #424242 ;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.inputshown{
+  color:black;
+  display:block;
+  z-index: 3;
+  width:40vw;
+  align-content:center;
+  height:30vh;
+  position:absolute;
+  margin-left: 12vw;
+  margin-right: auto;
+  right: 0;
+  text-align: center; 
+  overflow-y: hidden;
 }

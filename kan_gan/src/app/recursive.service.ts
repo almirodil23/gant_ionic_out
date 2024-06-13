@@ -18,6 +18,7 @@ interface arbolPadreHijo {
 export class RecursiveService {
   ind:number|undefined=0;
   datos:any;
+  actualParents:any=[];
   data_tree=data_tree_
   private selectedItemSubject: BehaviorSubject<HTMLElement | null> = new BehaviorSubject<HTMLElement | null>(null);
   selectedItem$: Observable<HTMLElement | null> = this.selectedItemSubject.asObservable();
@@ -102,6 +103,7 @@ export class RecursiveService {
             const foundInChildren = this.findData(value,nodo.children);
             if (foundInChildren) {
                 this.label.next(value)
+                console.log(foundInChildren)
                 return foundInChildren;
             }
         }
@@ -109,7 +111,7 @@ export class RecursiveService {
     return null;
  } 
 
- private findInChildren(label: string, children: arbolPadreHijo[] | undefined): arbolPadreHijo | undefined {
+  findInChildren(label: string, children: arbolPadreHijo[] | undefined): arbolPadreHijo | undefined {
   return children?.find((child: arbolPadreHijo) => child.label === label);
 }
 
@@ -145,21 +147,35 @@ move(nodeLabel: string, newParentLabel: string): boolean {
   }
 }
 
-private findParent(label: string, arbol?: arbolPadreHijo[]): arbolPadreHijo | null {
+
+private findParent(label: string, arbol?: arbolPadreHijo[], path: arbolPadreHijo[] = []): arbolPadreHijo | null {
   for (const nodo of arbol || this.data_tree) {
+    path.push(nodo);
+
+    if (nodo.label === label) {
+      this.actualParents = [...path];
+      return nodo;
+    }
+
     if (nodo.children) {
       const foundInChildren = this.findInChildren(label, nodo.children);
       if (foundInChildren) {
+        this.actualParents = [...path];
         return nodo;
       }
-      const foundInDescendants = this.findParent(label, nodo.children);
+
+      const foundInDescendants = this.findParent(label, nodo.children, path);
       if (foundInDescendants) {
         return foundInDescendants;
       }
     }
+
+    path.pop(); 
   }
+
   return null;
 }
+
 
 
  orderData(arbol: arbolPadreHijo[]){
@@ -187,14 +203,25 @@ private findParent(label: string, arbol?: arbolPadreHijo[]): arbolPadreHijo | nu
 }
  
 goTo(label: string)  {
-  console.log(label)
+  var parents=[]
   const nodo = this.findData(label);
-  if (nodo) {
+  this.findParent(label);
+  for(let a in this.actualParents){
+    const elements=document.getElementsByClassName('caret')
+    for(a in elements){
+          elements[a]
+      }}
+    }
+  
+  /*if (nodo) {
     setTimeout(() => {
       const elements = document.querySelectorAll('div.caret');
       for (const element of elements) {
         if (element.textContent?.trim() === label) {
           let parent = element.parentElement;
+          if(parent){
+              parents.push(parent);
+          }
           parent?.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
           while (parent && parent !== document.body) {
             if (parent.style.display === 'none') {
@@ -207,8 +234,23 @@ goTo(label: string)  {
           break;
         }
       }
-    }, 100); 
+    }, 100); */
+
+
+toggle(event: Event) {
+  const element = event.target as HTMLElement;
+  const parentElement = element.parentElement?.parentElement;
+  if (parentElement) {
+    const nestedElement = parentElement.querySelector('.nested') as HTMLElement;
+    if (nestedElement) {
+      nestedElement.classList.toggle('active');
+    }
+    element.classList.toggle('caret-down');
+    const elementicon=element.nextElementSibling
+    if(elementicon){
+    elementicon.textContent = elementicon.textContent === 'keyboard_arrow_right' ? 'expand_more' : 'keyboard_arrow_right';}
+  }
 }
 }
-}
+
 
