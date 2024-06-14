@@ -4,6 +4,8 @@ import { RecursiveService } from '../recursive.service';
 import { waitForAsync } from '@angular/core/testing';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { TabService } from '../tab-service.service';
+import { Router } from '@angular/router';
 
 
 
@@ -40,7 +42,7 @@ results:any=['...']
 
 
       
-      constructor(private recursiveService: RecursiveService) 
+      constructor(private recursiveService: RecursiveService, private tabService: TabService, private router:Router) 
       
       {
     this.selectedItem = this.recursiveService.selectedItem$.subscribe(item => {
@@ -74,6 +76,13 @@ results:any=['...']
     closeAlert(){
       const form=document.getElementById('drag')
       form?.classList.remove('eliminarshown1')
+    }
+
+    abrirTab(){
+      this.tabService.openNewTab({ label: this.selectedItem.label, content: 'nada a declarar' });
+      setTimeout(() => {
+        this.router.navigate(['form']);
+      }, 100);
     }
 
  async addHijo(event:Event){

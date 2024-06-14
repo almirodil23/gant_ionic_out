@@ -8,6 +8,7 @@
     <button mat-button id="toggle" (click)="addHijo($event)"><mat-icon mat-list-icon>add</mat-icon></button>
     <button mat-button id="toggle" (click)="eliminarNodo($event)"><mat-icon mat-list-icon>delete</mat-icon></button>
     <button mat-button (click)="buscar()" id="toggle"><mat-icon mat-list-icon>search</mat-icon></button>
+    <button mat-button (click)="abrirTab()" id="toggle"><mat-icon mat-list-icon>flip_to_front</mat-icon></button>
     <div class="modal" tabindex="2" role="dialog" id="input">
       <form style="display: flex;flex-direction: column;justify-content: center;" class="find" autocomplete="off" >
         <div [formGroup]="Form">
@@ -22,7 +23,6 @@
     </div>    
     </div>
 
-    <app-tab style="width: 100%"></app-tab>
 
     <div class="modal" tabindex="2" role="dialog" id="eliminar">
         <div class="modal-dialog" role="document">
