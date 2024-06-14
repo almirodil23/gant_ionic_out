@@ -36,7 +36,7 @@ selectedItem:any;
 state:number=0;
 node:any;
 menuData: arbolPadreHijo[];
-results:any=[]
+results:any=['...']
 
 
       
@@ -82,6 +82,7 @@ results:any=[]
     const parrafo=document.createElement("p")
     parrafo.appendChild(input)
     this.selectedItem.appendChild(parrafo)
+    input.focus()
 
 
     const form= await new Promise(resolve =>{
@@ -126,39 +127,82 @@ results:any=[]
 ngOnInit(): void {
 }
 
+
 async buscar() {
-  this.Form.controls['texto'].setValue('');
-  const valueChangesSubscription = this.Form.controls['texto'].valueChanges.subscribe(value => {
-  const result1=this.recursiveService.findData(value);
-  var child:any=[]
-  if(result1){}
-  if(result1?.children){
-    for(let a=0;a<result1?.children?.length;a++){
-    child.push(result1.children[a].label)}}
-/*Pendiente permitir seleccionar la coincidencia y navegar hacia ella*/
-
-  const result=`${result1?.label} --> ${child}...`
-  if(result1){this.results.push(result)}else{
-    this.results=[]
-  }
-  });
-
+  /*fallo al pulsar la lupa 3 veces seguidas, a la tercera no muesta contenido, hay que rastrear para ver por qué sucede */
   const form = document.getElementById('input');
-  form?.classList.add('inputshown');
 
-  const respuesta = await new Promise<string>(resolve => {
-    const bajarTecla = (event: KeyboardEvent) => {
-      if (event.key === 'Enter') {
-        resolve(this.Form.controls['texto'].value);
-        document.removeEventListener('keydown', bajarTecla);
+  form?.classList.add('inputshown');
+  this.Form.controls['texto'].setValue('');
+
+  const clickOutsideHandler = (event: MouseEvent) => {
+      const formElement = document.getElementsByClassName('find')[0];
+      if (formElement && !formElement.contains(event.target as Node)) {
+        form?.classList.remove('inputshown');
+        this.Form.reset();
+        this.results = ['...'];
+        document.removeEventListener('click', clickOutsideHandler);
+   
       }
     };
-    document.addEventListener('keydown', bajarTecla);
+    setTimeout(() => {
+      document.addEventListener('click', clickOutsideHandler);
+    }, 100);
+  
+
+  const valueChangesSubscription = this.Form.controls['texto'].valueChanges.subscribe(async (value) => {
+    const result1 = await this.recursiveService.findData(value);
+    let child: string[] = [];
+    let finded: HTMLCollectionOf<Element>;
+    let k = -1;
+
+    if (result1) {
+      if (result1.children) {
+        for (let a = 0; a < result1.children.length; a++) {
+          const label = result1.children[a].label;
+          if (label) {
+            child.push(label);
+          }
+        }
+      }
+
+      const result = `${result1.label} --> ${child}...`;
+      this.results = [];
+      this.results.push(result);
+      finded = document.getElementsByClassName('form-select');
+
+      const respuesta = await new Promise<string>((resolve) => {
+        const bajarTecla = (event: KeyboardEvent) => {
+          if (event.key === 'Enter') {
+            resolve(this.Form.controls['texto'].value);
+            document.removeEventListener('keydown', bajarTecla);
+            if (result1.label) {
+              this.recursiveService.goTo(result1.label);
+            }
+              this.Form.reset();
+              this.results = ['...'];
+              const form = document.getElementById('input');
+              form?.classList.remove('inputshown');
+              document.removeEventListener('click',clickOutsideHandler)
+            
+          }
+          if (event.key === 'ArrowDown') {
+            k = (k + 1) % finded.length;
+            try {
+              finded[k].classList.add('select-hover');
+            } catch (error) {
+              console.error(error);
+            }
+          }
+          if (event.key === 'ArrowUp') {
+            finded[k].classList.remove('select-hover');
+            k -= 1;
+          }
+        };
+        document.addEventListener('keydown', bajarTecla);
+      });
+    }
   });
-
-  valueChangesSubscription.unsubscribe();
-
-  this.Form.reset();
-  form?.classList.remove('inputshown');
 }
+
 }

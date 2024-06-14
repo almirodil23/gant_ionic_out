@@ -1,8 +1,8 @@
 <ul  [id]="'myUL'"cdkDropList (cdkDropListDropped)="drop($event)">
     <li *ngFor="let data of menuData" [attr.id]="data.label" [cdkDragData]="data" cdkDrag>
-      <div class="caret" (click)="selected($event);toggle($event)">
+      <div class="caret" (click)="selected($event, data);toggle($event)">
         <span class="spin">{{ data.label }}</span>
-        <mat-icon mat-list-icon *ngIf="data.children">keyboard_arrow_right</mat-icon>
+        <mat-icon style="pointer-events:none;"mat-list-icon *ngIf="data.children&&data.children.length>0">keyboard_arrow_right</mat-icon>
       </div>
       <ul class="nested" *ngIf="data.children && data.children.length">
         <app-recursive-core [menuData]="data.children"></app-recursive-core>

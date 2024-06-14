@@ -35,15 +35,15 @@ export class RecursiveCoreComponent implements OnInit{
   
   
 
-   selected(e: Event) {
+   selected(e: Event, nodo: arbolPadreHijo) {
     const element = e.currentTarget as HTMLElement;
     this.recursiveService.setSelectedItem(element);
+    this.recursiveService.setSelectedNode(nodo);
   }
   
   
   drop(event: CdkDragDrop<arbolPadreHijo[]>) {
     this.drops=this.drops+1
-    console.log(this.drops)
     /*pdte*/
     if(this.drops==3){
       const form=document.getElementById('drag')
@@ -51,7 +51,6 @@ export class RecursiveCoreComponent implements OnInit{
       this.drops=0 
     }
     const element = document.elementFromPoint(event.dropPoint.x,event.dropPoint.y);
-    console.log(element)
      if(element&&element.className==='caret-down'||element&&element.className==='spin'||element&&element.className==='spin caret-down'){
     if(element?.textContent){let zona=element.textContent
     this.recursiveService.move(event.item.data.label,zona)}
@@ -59,19 +58,24 @@ export class RecursiveCoreComponent implements OnInit{
     }
   
    toggle(event: Event) {
-    const element = event.target as HTMLElement;
+    var element= event.target as HTMLElement;
     const parentElement = element.parentElement?.parentElement;
+    if(element.tagName==='SPAN'){} else{element = element.firstChild as HTMLElement;}
     if (parentElement) {
       const nestedElement = parentElement.querySelector('.nested') as HTMLElement;
       if (nestedElement) {
         nestedElement.classList.toggle('active');
+        console.log(nestedElement)
       }
       element.classList.toggle('caret-down');
+      console.log(element)
       const elementicon=element.nextElementSibling
       if(elementicon){
       elementicon.textContent = elementicon.textContent === 'keyboard_arrow_right' ? 'expand_more' : 'keyboard_arrow_right';}
     }
-  }
+    }
+ 
+  
 
   getConnectedDropLists(nodeList: arbolPadreHijo[]): string[] {
     const ids: string[] = [];

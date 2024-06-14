@@ -713,13 +713,23 @@ div.caret.selected{
   color:black;
   display:block;
   z-index: 3;
-  width:40vw;
+  width:20vw;
   align-content:center;
   height:30vh;
   position:absolute;
-  margin-left: 12vw;
+  margin-left: 29vw;
   margin-right: auto;
   right: 0;
   text-align: center; 
   overflow-y: hidden;
+}
+
+
+.select-hover{
+  background-color: blue;
+}
+
+div.form-select:hover{
+  background-color: blue;
+
 }

@@ -23,15 +23,18 @@ export class RecursiveService {
   private selectedItemSubject: BehaviorSubject<HTMLElement | null> = new BehaviorSubject<HTMLElement | null>(null);
   selectedItem$: Observable<HTMLElement | null> = this.selectedItemSubject.asObservable();
   private label:BehaviorSubject<string|null>= new BehaviorSubject<string|null>(null)
-  selectedLabel$:Observable<string|null>=this.label.asObservable()
+  selectedLabel$:Observable<string|null>=this.label.asObservable();
+  public selectedNode?: arbolPadreHijo;
 
 
 
-
-
+  setSelectedNode(nodo: arbolPadreHijo){
+    this.selectedNode = nodo;
+  }
 
 
   setSelectedItem(element: HTMLElement) {
+    console.log('aqui')
     const prevSelectedItem = this.selectedItemSubject.getValue();
 
 
@@ -44,6 +47,7 @@ export class RecursiveService {
     if (prevSelectedItem) {
       prevSelectedItem.classList.remove('selected');
       prevSelectedItem.classList.add('caret');
+
     }
     element.classList.add('selected');
     this.selectedItemSubject.next(element);
@@ -59,13 +63,11 @@ export class RecursiveService {
   }
 
   addData(zona:string,value:string){
-     let nodo=this.findData(zona)
-     if(nodo){
-     if (!nodo.children){nodo.children=[]}
-        const newNode = {label: value };
-        nodo.children = [...nodo.children, newNode];
-       console.log(this.data_tree)  
-       this.getData() 
+      this.selectedNode?.children?.push({
+        label: `${value}`,
+        children: [],
+      });
+
        setTimeout(()=>{
         const elements = document.querySelectorAll('div.caret'); 
         for (const element of elements) {
@@ -79,7 +81,6 @@ export class RecursiveService {
         }
       },150)
     }
-  }
    
           
 
@@ -89,27 +90,33 @@ export class RecursiveService {
     if(nodo){
          delete nodo.children;
          delete nodo.label;
-       console.log(this.data_tree)   
-       this.getData()
   }}
 
 
- findData (value: string,arbol?: arbolPadreHijo[]): arbolPadreHijo | null {
-    for (const nodo of arbol||this.data_tree) {
-        if (nodo.label === value) {
-            return nodo;
+  
+  findData(value: string, arbol?: arbolPadreHijo[]): arbolPadreHijo | null {
+    const normalizedValue = value.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toUpperCase();
+  
+    for (const nodo of arbol || this.data_tree) {
+      if (nodo.label) {
+        const normalizedLabel = nodo.label.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toUpperCase();
+        
+        if (normalizedLabel.indexOf(normalizedValue) > -1) {
+          this.actualParents.push(nodo.label);
+          return nodo;
         }
-        if (nodo.children) {
-            const foundInChildren = this.findData(value,nodo.children);
-            if (foundInChildren) {
-                this.label.next(value)
-                console.log(foundInChildren)
-                return foundInChildren;
-            }
+      }
+      if (nodo.children) {
+        const foundInChildren = this.findData(value, nodo.children);
+        if (foundInChildren) {
+          this.label.next(value);
+          return foundInChildren;
         }
+      }
     }
-    return null;
- } 
+      return null;
+  }
+  
 
   findInChildren(label: string, children: arbolPadreHijo[] | undefined): arbolPadreHijo | undefined {
   return children?.find((child: arbolPadreHijo) => child.label === label);
@@ -206,12 +213,56 @@ goTo(label: string)  {
   var parents=[]
   const nodo = this.findData(label);
   this.findParent(label);
+  console.log(this.actualParents)
+  for (let key in this.actualParents) {
+    let parent = this.actualParents[key];
+    const node=document.getElementById(parent.label);
+    let li=node?.querySelector('.nested') as HTMLElement;
+    li.classList.add('active')
+    let span=node?.firstChild as HTMLElement
+    span.classList.add('caret-down')
+  }  
+   if(nodo?.label){
+    const elem=document.getElementById(nodo?.label)
+    if(elem){elem.classList.add('highlight');
+     setTimeout(()=>{
+      elem.classList.remove('highlight')
+     },1500)
+    }
+    }
+}
+
+
+toggle(event: Event) {
+  var element= event.target as HTMLElement;
+  const parentElement = element.parentElement?.parentElement;
+  if(element.tagName==='SPAN'){} else{element = element.firstChild as HTMLElement;}
+  if (parentElement) {
+    const nestedElement = parentElement.querySelector('.nested') as HTMLElement;
+    if (nestedElement) {
+      nestedElement.classList.toggle('active');
+      console.log(nestedElement)
+    }
+    element.classList.toggle('caret-down');
+    console.log(element)
+    const elementicon=element.nextElementSibling
+    if(elementicon){
+    elementicon.textContent = elementicon.textContent === 'keyboard_arrow_right' ? 'expand_more' : 'keyboard_arrow_right';}
+  }
+  }
+/*
   for(let a in this.actualParents){
     const elements=document.getElementsByClassName('caret')
     for(a in elements){
           elements[a]
       }}
     }
+
+
+
+*/
+
+
   
   /*if (nodo) {
     setTimeout(() => {
@@ -237,20 +288,7 @@ goTo(label: string)  {
     }, 100); */
 
 
-toggle(event: Event) {
-  const element = event.target as HTMLElement;
-  const parentElement = element.parentElement?.parentElement;
-  if (parentElement) {
-    const nestedElement = parentElement.querySelector('.nested') as HTMLElement;
-    if (nestedElement) {
-      nestedElement.classList.toggle('active');
-    }
-    element.classList.toggle('caret-down');
-    const elementicon=element.nextElementSibling
-    if(elementicon){
-    elementicon.textContent = elementicon.textContent === 'keyboard_arrow_right' ? 'expand_more' : 'keyboard_arrow_right';}
-  }
-}
+
 }
 
 

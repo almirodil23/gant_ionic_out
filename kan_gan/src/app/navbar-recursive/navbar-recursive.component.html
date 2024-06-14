@@ -8,18 +8,22 @@
     <button mat-button id="toggle" (click)="addHijo($event)"><mat-icon mat-list-icon>add</mat-icon></button>
     <button mat-button id="toggle" (click)="eliminarNodo($event)"><mat-icon mat-list-icon>delete</mat-icon></button>
     <button mat-button (click)="buscar()" id="toggle"><mat-icon mat-list-icon>search</mat-icon></button>
-    </div>
-    <app-tab style="width: 100%"></app-tab>
     <div class="modal" tabindex="2" role="dialog" id="input">
-      <form>
+      <form style="display: flex;flex-direction: column;justify-content: center;" class="find" autocomplete="off" >
         <div [formGroup]="Form">
-          <input type="text" id="texto" formControlName="texto">
+          <input type="text" id="texto" formControlName="texto" class="form-control" placeholder="Buscar..." aria-label="Buscar...." aria-describedby="basic-addon1">
         </div>
-        <div *ngFor="let a of results">
-          <p>{{ a }}</p>
+        <div style="display: flex;justify-content: center;flex-direction:column;">
+        <div *ngFor="let a of results" class="form-select" multiple aria-label="multiple select example">
+          <span>{{a}}</span>
         </div>
+      </div> 
       </form>
     </div>    
+    </div>
+
+    <app-tab style="width: 100%"></app-tab>
+
     <div class="modal" tabindex="2" role="dialog" id="eliminar">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -41,7 +45,8 @@
             <div class="modal-header border-0">
             </div>
             <div class="modal-body  border-0">
-              <p>¡Debes soltar el elemento en el titulo del contenedor!</p>
+              <p>¡Debes soltar el elemento en el titulo del contenedor! </p>
+              <p>O abrir el elemento para poder moverlo</p>
             </div>
             <div class="modal-footer">
                 <button mat-button class="btn btn-light" type="submit" (click)="closeAlert()"><mat-icon mat-list-icon>close</mat-icon></button>
