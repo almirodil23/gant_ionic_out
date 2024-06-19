@@ -2,6 +2,7 @@
   <app-recursive-core [menuData]="menuData"></app-recursive-core>
   </div>
   <div class="example-sidenav-content" style="align-items: start;">
+    
     <div style=>
     <button mat-button (click)="toggleSidenav()" id="toggle" *ngIf="isExpandedSide"><mat-icon mat-list-icon>navigate_before</mat-icon></button>
     <button mat-button (click)="toggleSidenav()" id="toggle" *ngIf="!isExpandedSide"><mat-icon mat-list-icon>navigate_next</mat-icon></button>
@@ -11,17 +12,18 @@
     <button mat-button (click)="abrirTab()" id="toggle"><mat-icon mat-list-icon>flip_to_front</mat-icon></button>
     <div class="modal" tabindex="2" role="dialog" id="input">
       <form style="display: flex;flex-direction: column;justify-content: center;" class="find" autocomplete="off" >
-        <div [formGroup]="Form">
+        <div [formGroup]="Form" id="Form">
           <input type="text" id="texto" formControlName="texto" class="form-control" placeholder="Buscar..." aria-label="Buscar...." aria-describedby="basic-addon1">
         </div>
         <div style="display: flex;justify-content: center;flex-direction:column;">
         <div *ngFor="let a of results" class="form-select" multiple aria-label="multiple select example">
-          <span>{{a}}</span>
+          <span><button type="submit" class="btn btn-light" id="transparent" data-index="a"></button>{{a}}</span>
         </div>
       </div> 
       </form>
     </div>    
     </div>
+    
 
 
     <div class="modal" tabindex="2" role="dialog" id="eliminar">

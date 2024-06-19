@@ -61,18 +61,6 @@ results:any=['...']
    
 
 
-   drop(event: CdkDragDrop<arbolPadreHijo[]>) {
-    if (event.previousContainer !== event.container) {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }}
-
-
-
     closeAlert(){
       const form=document.getElementById('drag')
       form?.classList.remove('eliminarshown1')
@@ -138,28 +126,28 @@ ngOnInit(): void {
 
 
 async buscar() {
-  /*fallo al pulsar la lupa 3 veces seguidas, a la tercera no muesta contenido, hay que rastrear para ver por qué sucede */
+  // Error al pulsar la lupa 3 veces seguidas: revisar por qué sucede.
   const form = document.getElementById('input');
-
   form?.classList.add('inputshown');
   this.Form.controls['texto'].setValue('');
 
   const clickOutsideHandler = (event: MouseEvent) => {
-      const formElement = document.getElementsByClassName('find')[0];
-      if (formElement && !formElement.contains(event.target as Node)) {
-        form?.classList.remove('inputshown');
-        this.Form.reset();
-        this.results = ['...'];
-        document.removeEventListener('click', clickOutsideHandler);
-   
-      }
-    };
-    setTimeout(() => {
-      document.addEventListener('click', clickOutsideHandler);
-    }, 100);
-  
+    const formElement = document.getElementsByClassName('find')[0];
+    if (formElement && !formElement.contains(event.target as Node)) {
+      form?.classList.remove('inputshown');
+      this.Form.reset();
+      this.results = ['...'];
+      document.removeEventListener('click', clickOutsideHandler);
+    }
+  };
+
+  setTimeout(() => {
+    document.addEventListener('click', clickOutsideHandler);
+  }, 100);
 
   const valueChangesSubscription = this.Form.controls['texto'].valueChanges.subscribe(async (value) => {
+
+    //--------------------PDTE RETORNAR TODOS LOS ELEMENTOS
     const result1 = await this.recursiveService.findData(value);
     let child: string[] = [];
     let finded: HTMLCollectionOf<Element>;
@@ -179,37 +167,63 @@ async buscar() {
       this.results = [];
       this.results.push(result);
       finded = document.getElementsByClassName('form-select');
+      const buttons = document.querySelectorAll('#transparent');
 
-      const respuesta = await new Promise<string>((resolve) => {
-        const bajarTecla = (event: KeyboardEvent) => {
-          if (event.key === 'Enter') {
-            resolve(this.Form.controls['texto'].value);
+      buttons?.forEach(button => {
+        button.addEventListener('click', event => {
+          if (result1.label) {
+            this.Form.reset();
+            this.results = ['...'];
+            form?.classList.remove('inputshown');
+            document.removeEventListener('click', clickOutsideHandler);
             document.removeEventListener('keydown', bajarTecla);
-            if (result1.label) {
-              this.recursiveService.goTo(result1.label);
-            }
-              this.Form.reset();
-              this.results = ['...'];
-              const form = document.getElementById('input');
-              form?.classList.remove('inputshown');
-              document.removeEventListener('click',clickOutsideHandler)
-            
+            valueChangesSubscription.unsubscribe()
+            this.selectedItem = this.recursiveService.goTo(result1.label);
+            console.log(result1.label)
           }
-          if (event.key === 'ArrowDown') {
-            k = (k + 1) % finded.length;
-            try {
-              finded[k].classList.add('select-hover');
-            } catch (error) {
-              console.error(error);
-            }
-          }
-          if (event.key === 'ArrowUp') {
-            finded[k].classList.remove('select-hover');
-            k -= 1;
-          }
-        };
-        document.addEventListener('keydown', bajarTecla);
+        });
       });
+
+      const bajarTecla = (event: KeyboardEvent) => {
+        if (event.key === 'Enter') {
+          event.preventDefault(); 
+          if (result1.label) {
+            this.Form.reset();
+            this.results = ['...'];
+            form?.classList.remove('inputshown');
+            document.removeEventListener('click', clickOutsideHandler);
+            document.removeEventListener('keydown', bajarTecla);
+            valueChangesSubscription.unsubscribe()
+            this.selectedItem = this.recursiveService.goTo(result1.label);
+            console.log(result1.label)
+          }
+          this.Form.reset();
+          this.results = ['...'];
+          form?.classList.remove('inputshown');
+          document.removeEventListener('click', clickOutsideHandler);
+          document.removeEventListener('keydown', bajarTecla);
+          valueChangesSubscription.unsubscribe()
+
+        }
+
+        if (event.key === 'ArrowDown') {
+          event.preventDefault(); 
+          k = (k + 1) % finded.length;
+          try {
+            finded[k].classList.add('select-hover');
+          } catch (error) {
+            console.error(error);
+          }
+        }
+
+        if (event.key === 'ArrowUp') {
+          event.preventDefault(); 
+          finded[k].classList.remove('select-hover');
+          k -= 1;
+        }
+      };
+
+      document.addEventListener('keydown', bajarTecla);
     }
   });
 }

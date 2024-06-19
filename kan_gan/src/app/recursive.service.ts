@@ -34,7 +34,6 @@ export class RecursiveService {
 
 
   setSelectedItem(element: HTMLElement) {
-    console.log('aqui')
     const prevSelectedItem = this.selectedItemSubject.getValue();
 
 
@@ -95,13 +94,17 @@ export class RecursiveService {
 
   
   findData(value: string, arbol?: arbolPadreHijo[]): arbolPadreHijo | null {
-    const normalizedValue = value.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toUpperCase();
-  
+    var sinAcentos=''
+    if (value){
+    sinAcentos = value.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toUpperCase();}
+    if(sinAcentos.length==0){sinAcentos=value}
     for (const nodo of arbol || this.data_tree) {
       if (nodo.label) {
-        const normalizedLabel = nodo.label.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toUpperCase();
-        
-        if (normalizedLabel.indexOf(normalizedValue) > -1) {
+        const valueLimpio = nodo.label.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toUpperCase();
+        if(valueLimpio.length==0){let valueLimpio=nodo.label}
+        if (valueLimpio.indexOf(sinAcentos
+    
+        ) > -1) {
           this.actualParents.push(nodo.label);
           return nodo;
         }
@@ -213,18 +216,19 @@ goTo(label: string)  {
   var parents=[]
   const nodo = this.findData(label);
   this.findParent(label);
-  console.log(this.actualParents)
   for (let key in this.actualParents) {
     let parent = this.actualParents[key];
     const node=document.getElementById(parent.label);
     let li=node?.querySelector('.nested') as HTMLElement;
+    if(li.className!=='nested active'){
     li.classList.add('active')
     let span=node?.firstChild as HTMLElement
-    span.classList.add('caret-down')
+    if(span.className!=='spin'){
+    span.classList.add('caret-down')}}
   }  
    if(nodo?.label){
     const elem=document.getElementById(nodo?.label)
-    if(elem){elem.classList.add('highlight');
+    if(elem){this.setSelectedItem(elem);elem.classList.add('highlight');
      setTimeout(()=>{
       elem.classList.remove('highlight')
      },1500)
@@ -250,44 +254,6 @@ toggle(event: Event) {
     elementicon.textContent = elementicon.textContent === 'keyboard_arrow_right' ? 'expand_more' : 'keyboard_arrow_right';}
   }
   }
-/*
-  for(let a in this.actualParents){
-    const elements=document.getElementsByClassName('caret')
-    for(a in elements){
-          elements[a]
-      }}
-    }
-
-
-
-*/
-
-
-  
-  /*if (nodo) {
-    setTimeout(() => {
-      const elements = document.querySelectorAll('div.caret');
-      for (const element of elements) {
-        if (element.textContent?.trim() === label) {
-          let parent = element.parentElement;
-          if(parent){
-              parents.push(parent);
-          }
-          parent?.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
-          while (parent && parent !== document.body) {
-            if (parent.style.display === 'none') {
-              parent.style.display = 'block';
-            }
-            parent = parent.parentElement;
-          }
-          this.setSelectedItem(element as HTMLElement);
-          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          break;
-        }
-      }
-    }, 100); */
-
-
 
 }
 

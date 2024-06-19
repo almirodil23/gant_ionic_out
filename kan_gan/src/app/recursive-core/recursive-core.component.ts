@@ -44,17 +44,18 @@ export class RecursiveCoreComponent implements OnInit{
   
   drop(event: CdkDragDrop<arbolPadreHijo[]>) {
     this.drops=this.drops+1
-    /*pdte*/
+    /*pdte aviso cuando no se realiza correctamente 3 drag and drop */
     if(this.drops==3){
       const form=document.getElementById('drag')
       if(form){form.classList.add('eliminarshown1') }
       this.drops=0 
     }
     const element = document.elementFromPoint(event.dropPoint.x,event.dropPoint.y);
+    if(event.item.data.label!==element?.innerHTML){   /*check que no se deposite en el mismo sitio*/
      if(element&&element.className==='caret-down'||element&&element.className==='spin'||element&&element.className==='spin caret-down'){
     if(element?.textContent){let zona=element.textContent
     this.recursiveService.move(event.item.data.label,zona)}
-    }
+    }}
     }
   
    toggle(event: Event) {
@@ -65,10 +66,9 @@ export class RecursiveCoreComponent implements OnInit{
       const nestedElement = parentElement.querySelector('.nested') as HTMLElement;
       if (nestedElement) {
         nestedElement.classList.toggle('active');
-        console.log(nestedElement)
       }
+      if(element)
       element.classList.toggle('caret-down');
-      console.log(element)
       const elementicon=element.nextElementSibling
       if(elementicon){
       elementicon.textContent = elementicon.textContent === 'keyboard_arrow_right' ? 'expand_more' : 'keyboard_arrow_right';}

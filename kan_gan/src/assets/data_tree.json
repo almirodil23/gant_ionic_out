@@ -35,7 +35,8 @@
             "label": "Mango",
             "children": [
               { "label": "Melocotón" },
-              { "label": "Pera" }
+              { "label": "Pera" },
+              { "label": "Cereza1"}
             ]
           }
         ]

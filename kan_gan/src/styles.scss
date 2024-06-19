@@ -680,7 +680,7 @@ div.caret.selected{
   top:15vh;
   width:40vw;
   align-content:center;
-  height:30vh;
+  height:40vh;
   position:absolute;
   margin-left: auto;
   margin-right: auto;
@@ -726,10 +726,20 @@ div.caret.selected{
 
 
 .select-hover{
-  background-color: blue;
+  background-color: lightgrey;
 }
 
 div.form-select:hover{
-  background-color: blue;
+  background-color: lightgrey;
 
+}
+
+#transparent{
+  width: 100%;
+  left: 0;
+  height: 12%;
+  z-index: 5;
+  position: absolute;
+  background-color: transparent;
+  border:0;
 }

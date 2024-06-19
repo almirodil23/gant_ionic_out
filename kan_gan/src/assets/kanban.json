@@ -23,8 +23,8 @@
 			"horasEstimadas": 30,
 			"horasRealizadas": 0,
 			"asignado": "David",
-			"fechaIncio": "2024-05-25",
-			"fechaFin": "2024-05-31",
+			"fechaIncio": "2024-07-01",
+			"fechaFin": "2024-07-01",
 			"estado": 0
 		},
 				{
@@ -36,7 +36,7 @@
 			"horasEstimadas": 50,
 			"horasRealizadas": 0,
 			"asignado": "David",
-			"fechaIncio": "2024-05-25",
+			"fechaIncio": "2024-05-06",
 			"fechaFin": "2024-05-31",
 			"estado": 0
 		}
