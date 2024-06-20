@@ -24,14 +24,23 @@ export class RecursiveService {
   selectedItem$: Observable<HTMLElement | null> = this.selectedItemSubject.asObservable();
   private label:BehaviorSubject<string|null>= new BehaviorSubject<string|null>(null)
   selectedLabel$:Observable<string|null>=this.label.asObservable();
+  private isExpandedSide: BehaviorSubject<boolean>=new BehaviorSubject(true);
+  isExpandedSide$: Observable<boolean>=this.isExpandedSide
   public selectedNode?: arbolPadreHijo;
 
+
+constructor(){
+  this.resize()
+}
 
 
   setSelectedNode(nodo: arbolPadreHijo){
     this.selectedNode = nodo;
   }
 
+   setExpandedSide(){
+    this.isExpandedSide.next(!this.isExpandedSide.value)
+   }
 
   setSelectedItem(element: HTMLElement) {
     const prevSelectedItem = this.selectedItemSubject.getValue();
@@ -276,6 +285,45 @@ toggle(event: Event) {
   }
   }
 
-}
+
+  resize() {
+    document.addEventListener('DOMContentLoaded',  () =>{
+      const resizer = document.getElementById('resizer');
+      if (!resizer || !resizer.parentElement) return;
+    
+      const navbar = resizer.previousElementSibling as HTMLElement;
+      const tab = resizer.nextElementSibling as HTMLElement;
+    
+      let isResizing = false;
+    
+      resizer.addEventListener('mousedown',  (e) =>{
+        isResizing = true;
+        document.body.style.cursor = 'ew-resize';
+        document.addEventListener('mousemove', (e:MouseEvent)=>{
+          if (!isResizing) return;
+          if(resizer){
+          const containerWidth = resizer.parentElement?.getBoundingClientRect().width;
+          if(containerWidth){
+          const newNavbarWidth = (e.clientX / containerWidth) * 100;
+          const newTabWidth = 100 - newNavbarWidth;
+          if(parseInt(navbar.style.width)>2){
+            this.isExpandedSide.next(true)
+          }
+          navbar.style.width = newNavbarWidth + 'vw';
+          tab.style.width = newTabWidth + 'vw';
+        }}
+        });
+
+        document.addEventListener('mouseup', onMouseUp);
+      });
+    
+      function onMouseUp() {
+        isResizing = false;
+        document.body.style.cursor = 'default';
+        document.removeEventListener('mouseup', onMouseUp);
+      }
+    });
+  }    
+}  
 
 

@@ -436,9 +436,12 @@ mat-list-item{
   max-width: 5% !important;
 }
 
+.mat-icon {width:100% !important;
+}
 
 .mat-mdc-tab-header{
   background-color: whitesmoke;
+  min-height:5vh;
 }
 .mat-drawer-side{
   border-right: solid 0px white;
@@ -743,4 +746,16 @@ div.form-select:hover{
   position: absolute;
   background-color: transparent;
   border:0;
+}
+
+.container-fluid {
+  display: flex;
+  height: 100%;
+}
+
+#resizer {
+  width: 5px;
+  cursor: ew-resize;
+  background-color: #aaa;
+  z-index: 1;
 }

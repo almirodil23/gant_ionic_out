@@ -57,6 +57,10 @@ results:any=['...']
         texto: new FormControl('')
       });
   
+    this.recursiveService.isExpandedSide$.subscribe(item=>{
+      this.isExpandedSide=item
+      console.log(this.isExpandedSide)
+    })  
     }
    
 
@@ -116,12 +120,20 @@ results:any=['...']
 
 
  toggleSidenav() {
-  this.isExpandedSide = !this.isExpandedSide;
+  this.recursiveService.setExpandedSide()
+  const navbar=document.getElementById('sidenav')
+  if(navbar&&!this.isExpandedSide){
+  navbar.style.width = '1.875vw';
+   }
+  else{
+    navbar?.style.width
+  } 
 }
 
 
 
 ngOnInit(): void {
+  
 }
 
 
