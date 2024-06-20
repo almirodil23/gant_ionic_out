@@ -35,8 +35,18 @@ export class RecursiveService {
 
   setSelectedItem(element: HTMLElement) {
     const prevSelectedItem = this.selectedItemSubject.getValue();
-
-
+    
+    if(element.tagName==='DIV'){
+      const i=element.children
+      if(i[1])
+      if(i[1].textContent==='keyboard_arrow_right'){
+      i[1].textContent='keyboard_arrow_down'}
+      else{
+      i[1].textContent='keyboard_arrow_right'
+      }
+    }
+  
+      
     const text1=element.innerText
     
     if(text1.match('\n')?.index){this.ind=text1.match('\n')?.index}else{this.ind=0}
@@ -45,7 +55,7 @@ export class RecursiveService {
 
     if (prevSelectedItem) {
       prevSelectedItem.classList.remove('selected');
-      prevSelectedItem.classList.add('caret');
+      prevSelectedItem.classList.add('caret-down');
 
     }
     element.classList.add('selected');
@@ -62,11 +72,13 @@ export class RecursiveService {
   }
 
   addData(zona:string,value:string){
-      this.selectedNode?.children?.push({
-        label: `${value}`,
-        children: [],
-      });
-
+    let nodo=this.findData(zona)
+    if(nodo){
+    if (!nodo.children){nodo.children=[]}
+       const newNode = {label: value };
+       nodo.children = [...nodo.children, newNode];
+      console.log(this.data_tree)  
+      this.getData() 
        setTimeout(()=>{
         const elements = document.querySelectorAll('div.caret'); 
         for (const element of elements) {
@@ -80,6 +92,7 @@ export class RecursiveService {
         }
       },150)
     }
+  }
    
           
 
@@ -224,7 +237,15 @@ goTo(label: string)  {
     li.classList.add('active')
     let span=node?.firstChild as HTMLElement
     if(span.className!=='spin'){
-    span.classList.add('caret-down')}}
+    span.classList.add('caret-down')
+    const i=span.children
+    i[1].textContent='keyboard_arrow_down'
+  }
+/*  const i = node?.firstChild as HTMLElement
+    const icon=i.children
+    icon[2].textContent='keyboard_arrow_down'
+*/    
+  }
   }  
    if(nodo?.label){
     const elem=document.getElementById(nodo?.label)

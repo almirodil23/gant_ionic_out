@@ -24,6 +24,7 @@ export class RecursiveCoreComponent implements OnInit{
   keys:any;
   selectedItem:any;
   drops:number=0;
+  
 
   
 
@@ -70,8 +71,8 @@ export class RecursiveCoreComponent implements OnInit{
       if(element)
       element.classList.toggle('caret-down');
       const elementicon=element.nextElementSibling
-      if(elementicon){
-      elementicon.textContent = elementicon.textContent === 'keyboard_arrow_right' ? 'expand_more' : 'keyboard_arrow_right';}
+   //   if(elementicon){
+   //   elementicon.textContent = elementicon.textContent === 'keyboard_arrow_right' ? 'expand_more' : 'keyboard_arrow_down';}
     }
     }
  

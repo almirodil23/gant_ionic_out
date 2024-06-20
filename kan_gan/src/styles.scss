@@ -605,8 +605,9 @@ ul, #myUL {
   margin-right: 6px;
 }
 
-.caret-down mat-icon {
-  transform: rotate(90deg);
+.cdk-drag.caret.caret-down mat-icon {
+  content: 'keyboard_arrow_down'
+
 }
 
 .nested {
