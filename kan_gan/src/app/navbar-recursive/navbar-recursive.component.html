@@ -1,4 +1,4 @@
-<div style="color:whitesmoke;" class="sidenav" *ngIf="isExpandedSide">
+<div style="color:whitesmoke;" class="sidenav" [ngClass]="{'sidenav':isExpandedSide,'sidenav1':!isExpandedSide}">
   <app-recursive-core [menuData]="menuData"></app-recursive-core>
   </div>
   <div class="example-sidenav-content" style="align-items: start;">
